@@ -1,0 +1,143 @@
+%\documentclass[12pt,notitlepage]{article}
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{amsthm}
+\usepackage{pdfpages}
+\usepackage{amsmath}
+\usepackage{enumerate} 
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\usepackage{hyperref}
+%\usepackage[T1]{fontenc}
+\usepackage{url}
+\usepackage{lipsum}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{lscape}
+\usepackage{colortbl}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\usepackage[nottoc,numbib]{tocbibind}
+\usepackage{fancyhdr}
+\usepackage{hhline}
+\usepackage[printonlyused]{acronym}
+
+%\usepackage{txfonts}
+\usepackage{lipsum,etoolbox}% http://ctan.org/pkg/{lipsum,etoolbox}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[normalem]{ulem}
+
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+
+\usepackage{minted}
+
+\definecolor{black}{RGB}{0,0,0}
+
+\usepackage{fancyvrb}
+
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	total={170mm,257mm},
+	right=3cm,
+	left=3.5cm,
+	top=3cm,
+	bottom=3cm
+}
+
+
+\usepackage{titlesec}
+\usepackage{hyperref}
+\titleclass{\subsubsubsection}{straight}[\subsection]
+
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsection.\arabic{paragraph}} % optional; useful if paragraphs are to be numbered
+
+\titleformat{\subsubsubsection}
+{\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
+	{3.25ex \@plus1ex \@minus.2ex}%
+	{-1em}%
+	{\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}%
+	{3.25ex \@plus1ex \@minus .2ex}%
+	{-1em}%
+	{\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{5}
+\def\toclevel@paragraph{6}
+\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+\def\l@paragraph{\@dottedtocline{5}{10em}{5em}}
+\def\l@subparagraph{\@dottedtocline{6}{14em}{6em}}
+\makeatother
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+\begin{document}
+	\begin{titlepage}
+		\begin{center}
+			\textbf{NANYANG TECHNOLOGICAL UNIVERSITY}\\\vspace{1em}\sout{SEMESTER 1 EXAMINATION 2016-2017} Suggested Solutions\\\vspace{1em}
+			\textbf{MH1401/CY1401 - Algorithms and Computing I}
+		\end{center}
+				\vspace{5em}
+	\underline{NOTE:}
+	\begin{enumerate}
+		\item The following paper has been converted from MATLAB to Python.
+	\end{enumerate}
+	\vfill
+	\end{titlepage}
+
+\pagenumbering{roman}
+
+	\tableofcontents
+	\newpage
+	\pagenumbering{arabic}
+	\addcontentsline{toc}{section}{Questions}
+\section*{Questions}
+\textbf{QUESTION 1}
+	\begin{enumerate}[(a)]
+		\item How do you check that an input \texttt{x} given by a user is a positive integer?
+		\item Given vec=[1 0 3 0], what you be the result of the following command:\\\texttt{any(vec) \&\& all(vec)}
+		\item Given the matrix\begin{equation*}
+		mat = \begin{pmatrix*}
+		1 & 2 & 3\\4 & 5 & 6\\7 & 8 & 9
+		\end{pmatrix*}
+		\end{equation*}
+		what is the result of the following command:\\
+		\texttt{np.sum(mat[1,3]*mat[1,:]))}
+		\item Rewrite the following \texttt{if-elif} statement as a \sout{\texttt{switch}} \textbf{nested} \texttt{if-else} statement that accomplishes exactly the same thing. Assume that \texttt{x} is an integer variable that has been initialised and the function \texttt{f(x,d)} is defined.\begin{verbatim}if x < -3 or x >= 3:
+	    y=f(x,1)
+	elif x > 0:
+	    y=f(x,2)
+elif x < 0:
+    y=f(x,3)
+else:
+    y=f(x,4)
+	 \end{verbatim}
+		\end{enumerate}
+	\textbf{QUESTION 2}\\
+	{\par \noindent In Singapore, personal income tax rates for resident taxpayers are progressive. This means higher income earners pay a proportionately higher tax, with the current highest personal income tax rate at 20\%.}
+	\newpage
+	\addcontentsline{toc}{section}{Solutions (Brandon)}
+	\section*{Suggested Solutions (Brandon)}
+	\newpage
+	\addcontentsline{toc}{section}{Solutions (Camille)}
+	\section*{Suggested Solutions (Camille)}
+\end{document}
