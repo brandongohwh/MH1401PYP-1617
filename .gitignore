@@ -1,5 +1,6 @@
-
-PYP16.log
-PYP16.pdf
-PYP16.synctex.gz
-PYP16.log
+*.log
+*.aux
+*.out
+*.toc
+*.pygtex
+*.pygstyle
