@@ -3,7 +3,7 @@
     \PYG{k}{if} \PYG{n}{income} \PYG{o}{\PYGZlt{}=} \PYG{l+m+mi}{20000}\PYG{p}{:}
         \PYG{k}{return} \PYG{l+m+mi}{0}\PYG{p}{;}
     \PYG{k}{elif} \PYG{n}{income} \PYG{o}{\PYGZlt{}=} \PYG{l+m+mi}{40000}\PYG{p}{:}
-        \PYG{k}{return} \PYG{l+m+mf}{0.05}\PYG{o}{*}\PYG{n}{income}\PYG{p}{;}
+        \PYG{k}{return} \PYG{l+m+mf}{0.05} \PYG{o}{*} \PYG{n}{income}\PYG{p}{;}
     \PYG{k}{elif} \PYG{n}{income} \PYG{o}{\PYGZlt{}=} \PYG{l+m+mi}{100000}\PYG{p}{:}
         \PYG{k}{return} \PYG{l+m+mf}{0.1} \PYG{o}{*} \PYG{n}{income}\PYG{p}{;}
     \PYG{k}{elif} \PYG{n}{income} \PYG{o}{\PYGZlt{}=} \PYG{l+m+mi}{200000}\PYG{p}{:}
