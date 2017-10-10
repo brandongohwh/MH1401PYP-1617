@@ -1,0 +1,17 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{income\PYGZus{}tax\PYGZus{}sg}\PYG{p}{(}\PYG{n}{income}\PYG{p}{):}
+    \PYG{k}{if} \PYG{n}{income} \PYG{o}{\PYGZlt{}=} \PYG{l+m+mi}{20000}\PYG{p}{:}
+        \PYG{k}{return} \PYG{l+m+mi}{0}
+    \PYG{k}{elif} \PYG{n}{income} \PYG{o}{\PYGZlt{}=} \PYG{l+m+mi}{40000}\PYG{p}{:}
+        \PYG{k}{return} \PYG{l+m+mf}{0.05} \PYG{o}{*} \PYG{p}{(}\PYG{n}{income}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{20000}\PYG{p}{)}
+    \PYG{k}{elif} \PYG{n}{income} \PYG{o}{\PYGZlt{}=} \PYG{l+m+mi}{100000}\PYG{p}{:}
+        \PYG{k}{return} \PYG{l+m+mf}{0.05} \PYG{o}{*} \PYG{l+m+mi}{20000} \PYG{o}{+} \PYG{l+m+mf}{0.1} \PYG{o}{*} \PYG{p}{(}\PYG{n}{income} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{60000}\PYG{p}{)}
+    \PYG{k}{elif} \PYG{n}{income} \PYG{o}{\PYGZlt{}=} \PYG{l+m+mi}{200000}\PYG{p}{:}
+        \PYG{k}{return} \PYG{l+m+mf}{0.05} \PYG{o}{*} \PYG{l+m+mi}{20000} \PYG{o}{+} \PYG{l+m+mf}{0.1} \PYG{o}{*} \PYG{l+m+mi}{60000} \PYG{o}{+} \PYG{l+m+mf}{0.15} \PYG{o}{*} \PYGZbs{}
+        \PYG{p}{(}\PYG{n}{income} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{100000}\PYG{p}{)}
+    \PYG{k}{else}
+        \PYG{k}{return} \PYG{l+m+mf}{0.05} \PYG{o}{*} \PYG{l+m+mi}{20000} \PYG{o}{+} \PYG{l+m+mf}{0.1} \PYG{o}{*} \PYG{l+m+mi}{60000} \PYG{o}{+} \PYG{l+m+mf}{0.15} \PYG{o}{*} \PYG{l+m+mi}{100000} \PYG{o}{+} \PYGZbs{}
+        \PYG{l+m+mf}{0.2} \PYG{o}{*} \PYG{p}{(}\PYG{n}{income} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{200000}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} \PYGZsq{}\PYGZbs{}\PYGZsq{} is a newline character that continues the previous line}
+\end{Verbatim}
