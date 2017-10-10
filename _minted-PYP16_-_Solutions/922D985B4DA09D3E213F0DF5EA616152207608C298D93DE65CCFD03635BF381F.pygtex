@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{x}\PYG{o}{=\PYGZhy{}}\PYG{l+m+mi}{1}
+\PYG{k}{while}\PYG{p}{(}\PYG{n}{x}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{0}\PYG{p}{):}
+    \PYG{n}{x}\PYG{o}{=}\PYG{n+nb}{int}\PYG{p}{(}\PYG{n+nb}{input}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Input a positive integer\PYGZdq{}}\PYG{p}{))}
+\end{Verbatim}

@@ -123,10 +123,12 @@
 \newcommand{\bigabs}[1]{\left| #1 \right|}
 \newcommand{\bignorm}[1]{\left\| #1 \right\|}
 
+\newcommand{\py}{python}
+
 \begin{document}
 	\begin{titlepage}
 		\begin{center}
-			\textbf{NANYANG TECHNOLOGICAL UNIVERSITY}\\\vspace{1em}\sout{SEMESTER 1 EXAMINATION 2016-2017} Suggested Solutions\\\vspace{1em}
+			\textbf{NANYANG TECHNOLOGICAL UNIVERSITY}\\\vspace{1em}Suggested Solutions\\\vspace{1em}
 			\textbf{MH1401/CY1401 - Algorithms and Computing I}
 		\end{center}
 				\vspace{5em}
@@ -142,7 +144,6 @@
 	\tableofcontents
 	\newpage
 	\pagenumbering{arabic}
-	\addcontentsline{toc}{section}{Questions}
 
 \begin{ques}\hfill (10 marks)\\
 	%		Kenneth had a little lamb\\
@@ -150,51 +151,52 @@
 	%		She needed it for Bio lab\\
 	%		But her experiment would not run
 	\begin{enumerate}[(a)]
-		\item How do you check that an input \texttt{x} given by a user is a positive integer?
-		\item Given vec=[1 0 3 0], what you be the result of the following command:\\\texttt{any(vec) \&\& all(vec)}
-		\item Given the matrix\begin{equation*}
-		mat = \begin{pmatrix*}
-		1 & 2 & 3\\4 & 5 & 6\\7 & 8 & 9
-		\end{pmatrix*}
-		\end{equation*}
-		what is the result of the following command:\\
-		\texttt{np.sum(mat[1,3]*mat[1,:]))}
-		\item Rewrite the following \texttt{if-elif} statement as a \textbf{nested} \texttt{if-else} statement that accomplishes exactly the same thing. Assume that \texttt{x} is an integer variable that has been initialised and the function \texttt{f(x,d)} is defined.\begin{verbatim}if x < -3 or x >= 3:
-		y=f(x,1)
-		elif x > 0:
-		y=f(x,2)
-		elif x < 0:
-		y=f(x,3)
-		else:
-		y=f(x,4)
-		\end{verbatim}
+		\item 
+		\begin{minted}{\py}
+x=-1
+while(x<=0):
+    x=int(input("Input a positive integer"))
+		\end{minted}
+		\item 0
+		\item 18
+		\item 
+\begin{minted}{\py}
+if x < -3 or x >= 3:
+    y=f(x,1)
+else:
+    if x < 0:
+        y=f(x,3)
+    else:
+        if x == 0:
+            y=f(x,4)
+        else:
+            y=f(x,2)
+\end{minted}
 	\end{enumerate}
 \end{ques}
 
 
-\begin{ques}\hfill (10 marks)\vspace*{1em}\\
+\begin{ques}\hfill (10 marks)\\
 	%		Kenneth had a little lamb\\
 	%		Whose fleece was sheared by Lan\\
 	%		She needed it for Bio lab\\
 	%		But her experiment would not run
-	In Singapore, personal income tax rates for resident taxpayers are progressive. This means higher income earners pay a proportionately higher tax, with the current highest personal income tax rate at 20\%.
-	
 	\begin{enumerate}[(i)]
-		\item Imagine a very simple tax system where a citizen pays an income tax rate with the rule from the table below.
-		\begin{table}[H]
-			\centering
-			\begin{tabular}{|c|c|}
-				\hline
-				\textbf{Income} (in SGD) & \textbf{Tax rate}\\
-				\hline
-				$0$ to $20,000$ included & 0\&\\
-				$20,001$ to $40,000$ included & 5\&\\
-				$40,001$ to $100,000$ included & 10\&\\
-				$100,001$ to $200,000$ included & 15\&\\
-				more than $200,001$ & 20\&\\
-			\end{tabular}
-		\end{table}
-		For example, if a citizen has an income of $45,000$ SGD, he will be in the 10\% rate section, so he will pay $45,000\times 0.1 = 4,500$ SGD. Write a function \ttx{income\_tax} that will take as input the income of the citizen, and that will return the income tax amount he has to pay.
+		\item 
+		\begin{minted}{\py}
+def income_tax(income):
+    if income <= 20000:
+        return 0;
+    elif income <= 40000:
+        return 0.05*income;
+    elif income <= 100000:
+        return 0.1 * income;
+    elif income <= 200000:
+        return 0.15 * income;
+    else
+        return 0.2 * income;
+end
+		\end{minted}
 		
 		
 		\item In Singapore (and in many other countries), the rule is slightly more complex as the income is taxed in layers, with a higher tax rate applied to each successive layer. Using the same Table as before, a citizen will pay a 0\% tax rate for its first $20,000$ SGD, then a 5\% tax rate for the next $20,000$ SGD, then a 10\% tax rate for its next $60,000$ SGD, etc.
