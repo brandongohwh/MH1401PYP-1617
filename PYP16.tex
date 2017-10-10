@@ -258,7 +258,7 @@
 			\item how many approximation steps are needed using Newton's method (starting with $R_1 = 10$ as first approximation), so that the distance between the approximation and the real $\sqrt{X}$ value is smaller of equal to $a$, and
 			\item the corresponding distance value when the sufficiently close approximation is found.
 		\end{itemize}
-		Warning: note that the function outputs two values (by output, we mean that the function itself outputs the value, not just a printing on the screen). Hint: you can use the built-in functions \ttx{sqrt} and \ttx{absolute} in the \ttx{numpy} package in PYTHON.
+		Warning: note that the function outputs two values (by output, we mean that the function itself outputs the value, not just a printing on the screen). Hint: you can use the built-in functions \ttx{sqrt} (in the \texttt{math} package) and \ttx{abs} in PYTHON.
 	\end{enumerate}
 \end{ques}
 
@@ -296,7 +296,7 @@
 		
 		\item Implement a function \ttx{check\_victory} that takes as input a rod vector \ttx{x}, and outputs the value $1$ if this rod contains all the disks (you can assume that the game contains $5$ disks in total). Otherwise, it outputs $0$.
 		
-		\item Assume that you have access to the functions \ttx{check\_move} and \ttx{check\_victory} described above. Implement a script that will ask a human player to input two rods' indexes \ttx{x} and \ttx{y} (you can assume that the player never inputs an error, the indexes always belong to $[1,2,3]$), check if the move from red \ttx{x} to rod \ttx{y} is valid, and execute this move if it is indeed a valid one. The script will then repeat the process until a victory is attained by the human player. (Hint: use a list or an array to store the three rods' vectors, so you can access them directly with indexes.)
+		\item Assume that you have access to the functions \ttx{check\_move} and \ttx{check\_victory} described above. Implement a script that will ask a human player to input two rods' indexes \ttx{x} and \ttx{y} (you can assume that the player never inputs an error, the indexes always belong to $[0,1,2]$), check if the move from rod \ttx{x} to rod \ttx{y} is valid, and execute this move if it is indeed a valid one. The script will then repeat the process until a victory is attained by the human player. (Hint: use a list or an array to store the three rods' vectors, so you can access them directly with indexes.)
 	\end{enumerate}
 \end{ques}
 

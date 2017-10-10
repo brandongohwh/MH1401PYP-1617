@@ -226,28 +226,45 @@ def income_tax_sg(income):
 	%		Whose fleece was sheared by Lan\\
 	%		She needed it for Bio lab\\
 	%		But her experiment would not run
-	Newton's method is a method for finding successively better approximations to the roots (or zeroes) of a real-valued function. It can be used to easily find a good approximation of the square root of a number $X\geq 0$. Let $R_1 > 0$ be a rather close approximation of $\sqrt{X}$, then $R_2 = \frac{1}{2}\bigbracket{\frac{R_1+X}{R_1}}$ offers an even better approximation of $\sqrt{X}$.
-	
 	\begin{enumerate}[(i)]
+		\item
 		\begin{minted}{\py}
-import math
-if X < 0 or math.floor(n) != n:
-    return -1;
-if n == 1:
-    R1=10;
-    return R1;
-else:
-    Rx= 0.5 * (newton_sqrt(X,n-1)+X)/newton_sqrt(X,n-1)
-    return Rx;		
+def newton_sqrt(X,n):
+    if X < 0 or n <= 0:
+        return -1;
+    if n == 1:
+        R1 = 10;
+        return R1;
+    else:
+        out = newton_sqrt(X,n-1)
+        Rx = 0.5 * (out + X) / out
+        return Rx;		
+
+# Note that if they did not ask for recursion,
+# we can use the following for loop instead:
+
+# Non-recursion method:
+def newton_sqrt(X,n):
+    R1 = 10
+    for i in range(1,n+1):
+        if i-1 == 0:
+            Rx = R1
+        else:
+            Rx = 0.5 * (R1+x)/R1
+            R1 = Rx
+    return(Rx)
+\end{minted}
+\item
+		\begin{minted}{\py}
+def newton_sqrt_approx(X,a):
+    import math
+    i = 0;
+    dist=a+1;
+    while (i <= 0 or dist > a):
+        i+=1;
+        dist = abs(math.sqrt(X)-(newton_sqrt(X,i)))
+    print("Requires %d steps, distance = %.6f" % (i,dist))
 		\end{minted}
-		\item Write a \textbf{recursive} function \ttx{newton\_sqrt(X,n)} that will return the $n$-th approximation of $\sqrt{X}$ using Newton's method (starting with $R_1 = 10$ as first approximation). As error check, the function returns $-1$ when $X$ is negative or when $n$ is not a positive integer.
-		
-		\item Assume that you have access to the function \ttx{newton\_sqrt(X,n)} described above. Write a function \ttx{newton\_sqrt\_approx(X,a)} that will output
-		\begin{itemize}
-			\item how many approximation steps are needed using Newton's method (starting with $R_1 = 10$ as first approximation), so that the distance between the approximation and the real $\sqrt{X}$ value is smaller of equal to $a$, and
-			\item the corresponding distance value when the sufficiently close approximation is found.
-		\end{itemize}
-		Warning: note that the function outputs two values (by output, we mean that the function itself outputs the value, not just a printing on the screen). Hint: you can use the built-in functions \ttx{sqrt} and \ttx{absolute} in the \ttx{numpy} package in PYTHON.
 	\end{enumerate}
 \end{ques}
 
@@ -259,22 +276,23 @@ else:
 	%		Whose fleece was sheared by Lan\\
 	%		She needed it for Bio lab\\
 	%		But her experiment would not run
-	The Tower of Hanoi is a well-known mathematical game. It consists of \textbf{three rods}, and a number of disks of different sizes which can slide onto any of the three rods. The puzzle starts with all the disks stacked in ascending order of size on the first rod, the smallest at the top, thus making a conical shape (see picture below). The objective of the puzzle is to move the entire stack to the third rod (only one disk can be moved at a time), obeying the following simple rules:
-	\begin{itemize}
-		\item Each move consists of taking the upper disk from one of the stacks and placing it on top of another stack, i.e. a disk can only be moved if it is the uppermost disk on a stack.
-		
-		\item No disk may be placed on top of a smaller disk.
-	\end{itemize}
-	
 	\begin{enumerate}[(i)]
-		\item Write a \textbf{recursive} function \ttx{newton\_sqrt(X,n)} that will return the $n$-th approximation of $\sqrt{X}$ using Newton's method (starting with $R_1 = 10$ as first approximation). As error check, the function returns $-1$ when $X$ is negative or when $n$ is not a positive integer.
-		
-		\item Assume that you have access to the function \ttx{newton\_sqrt(X,n)} described above. Write a function \ttx{newton\_sqrt\_approx(X,a)} that will output
-		\begin{itemize}
-			\item how many approximation steps are needed using Newton's method (starting with $R_1 = 10$ as first approximation), so that the distance between the approximation and the real $\sqrt{X}$ value is smaller of equal to $a$, and
-			\item the corresponding distance value when the sufficiently close approximation is found.
-		\end{itemize}
-		Warning: note that the function outputs two values (by output, we mean that the function itself outputs the value, not just a printing on the screen). Hint: you can use the built-in functions \ttx{sqrt} and \ttx{absolute} in the \ttx{numpy} package in PYTHON.
+\item
+\begin{minted}{\py}
+def check_move(x,y):
+    if x[-1] > y[-1] or x == []:
+        return -1
+    else:
+        return 0
+        \end{minted}
+        \item 
+        \begin{minted}{\py}
+def check_victory(x):
+    for i in range(len(x)):
+        if x[i] <= x[i+1]:
+             return -1
+    return 0
+    \end{minted}
 	\end{enumerate}
 \end{ques}
 

@@ -1,0 +1,26 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{newton\PYGZus{}sqrt}\PYG{p}{(}\PYG{n}{X}\PYG{p}{,}\PYG{n}{n}\PYG{p}{):}
+    \PYG{k}{if} \PYG{n}{X} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{0} \PYG{o+ow}{or} \PYG{n}{n} \PYG{o}{\PYGZlt{}=} \PYG{l+m+mi}{0}\PYG{p}{:}
+        \PYG{k}{return} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{;}
+    \PYG{k}{if} \PYG{n}{n} \PYG{o}{==} \PYG{l+m+mi}{1}\PYG{p}{:}
+        \PYG{n}{R1} \PYG{o}{=} \PYG{l+m+mi}{10}\PYG{p}{;}
+        \PYG{k}{return} \PYG{n}{R1}\PYG{p}{;}
+    \PYG{k}{else}\PYG{p}{:}
+        \PYG{n}{out} \PYG{o}{=} \PYG{n}{newton\PYGZus{}sqrt}\PYG{p}{(}\PYG{n}{X}\PYG{p}{,}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}
+        \PYG{n}{Rx} \PYG{o}{=} \PYG{l+m+mf}{0.5} \PYG{o}{*} \PYG{p}{(}\PYG{n}{out} \PYG{o}{+} \PYG{n}{X}\PYG{p}{)} \PYG{o}{/} \PYG{n}{out}
+        \PYG{k}{return} \PYG{n}{Rx}\PYG{p}{;}
+
+\PYG{c+c1}{\PYGZsh{} Note that if they did not ask for recursion,}
+\PYG{c+c1}{\PYGZsh{} we can use the following for loop instead:}
+
+\PYG{c+c1}{\PYGZsh{} Non\PYGZhy{}recursion method:}
+\PYG{k}{def} \PYG{n+nf}{newton\PYGZus{}sqrt}\PYG{p}{(}\PYG{n}{X}\PYG{p}{,}\PYG{n}{n}\PYG{p}{):}
+    \PYG{n}{R1} \PYG{o}{=} \PYG{l+m+mi}{10}
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{n}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{):}
+        \PYG{k}{if} \PYG{n}{i}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{:}
+            \PYG{n}{Rx} \PYG{o}{=} \PYG{n}{R1}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{n}{Rx} \PYG{o}{=} \PYG{l+m+mf}{0.5} \PYG{o}{*} \PYG{p}{(}\PYG{n}{R1}\PYG{o}{+}\PYG{n}{x}\PYG{p}{)}\PYG{o}{/}\PYG{n}{R1}
+            \PYG{n}{R1} \PYG{o}{=} \PYG{n}{Rx}
+    \PYG{k}{return}\PYG{p}{(}\PYG{n}{Rx}\PYG{p}{)}
+\end{Verbatim}
