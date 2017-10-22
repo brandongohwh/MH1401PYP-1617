@@ -179,7 +179,6 @@ while(x <= 0 or x!=math.floor(x)):
         if (x <= 0 or x!=math.floor(x)):
             print("The input is not correct!")
     except:
-        x=-1
         print("The input is not correct!")
 
 # Alternative solution
@@ -191,8 +190,9 @@ while(x <= 0 or x!=int(x)):
         if (x <= 0 or x!=math.floor(x)):
             print("The input is not correct!")
     except:
-        x=-1
         print("The input is not correct!")
+        
+# the except case is to catch errors if the user inputs a string
 		\end{minted}
 		\item 0
 		\item 18
