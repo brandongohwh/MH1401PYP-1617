@@ -172,11 +172,11 @@
 	%		She needed it for Bio lab\\
 	%		But her experiment would not run
 	\begin{enumerate}[(a)]
-		\item Assume that an integer input \texttt{x} is given by a user. How do you check that \ttx{x} is a positive integer?
+		\item Assume that a (general) input \texttt{x} is given by a user. How do you check that \ttx{x} is a positive integer? (That is, error check an input \ttx{x} to m,ake sure it is a positive integer.)
 		
 		\item Given a vector \ttx{vec} initialised as $[1, 0, 3, 0]$, what would be the result of the following command?\vspace*{1em}
 		
-		\texttt{any(vec) \&\& all(vec)}
+		\ttx{any(vec) and all(vec)}
 		
 		\item Given the matrix\begin{equation*}
 		\text{\ttx{mat}} = \begin{pmatrix*}
@@ -248,7 +248,7 @@
 	%		Whose fleece was sheared by Lan\\
 	%		She needed it for Bio lab\\
 	%		But her experiment would not run
-	Newton's method is a method for finding successively better approximations to the roots (or zeroes) of a real-valued function. It can be used to easily find a good approximation of the square root of a number $X\geq 0$. Let $R_1 > 0$ be a rather close approximation of $\sqrt{X}$, then $R_2 = \frac{1}{2}\bigbracket{\frac{R_1+X}{R_1}}$ offers an even better approximation of $\sqrt{X}$.
+	Newton's method is a method for finding successively better approximations to the roots (or zeroes) of a real-valued function. It can be used to easily find a good approximation of the square root of a number $X\geq 0$. Let $R_1 > 0$ be a rather close approximation of $\sqrt{X}$, then $R_2 = \frac{1}{2}\bigbracket{\frac{R_1^2+X}{R_1}}$ offers an even better approximation of $\sqrt{X}$.
 	
 	\begin{enumerate}[(i)]
 		\item Write a \textbf{recursive} function \ttx{newton\_sqrt(X,n)} that will return the $n$-th approximation of $\sqrt{X}$ using Newton's method (starting with $R_1 = 10$ as first approximation). As error check, the function returns $-1$ when $X$ is negative or when $n$ is not a positive integer.
