@@ -170,9 +170,17 @@
 	\begin{enumerate}[(a)]
 		\item 
 		\begin{minted}{\py}
+import math
+
 x = -1
-while(x <= 0):
-    x = int(input("Input a positive integer"))
+while(x <= 0 or x!=math.floor(x)):
+    x = float(input("Input a positive integer: "))
+
+# Alternative solution
+
+x = -1
+while(x <= 0 or x!=int(x)):
+    x = float(input("Input a positive integer: "))
 		\end{minted}
 		\item 0
 		\item 18
