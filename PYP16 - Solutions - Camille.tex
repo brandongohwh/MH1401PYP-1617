@@ -223,11 +223,6 @@ else:
 			\item 
 			\begin{minted}{\py}
 def income_tax(n):
-
-    while n < 0:
-        print('Error: income must be non-negative.')
-        n = int(input('Enter income: '))
-    
     if n <= 20000:
         return 0
     elif n <= 40000:
@@ -242,11 +237,6 @@ def income_tax(n):
 			\item
 			\begin{minted}{\py}
 def income_tax_sg(n):
-
-    while n < 0:
-        print('Error: income must be non-negative.')
-        n = int(input('Enter income: '))
-    
     if n <= 20000:
         return 0
     elif n <= 40000:
@@ -280,26 +270,16 @@ but in the code it's treated as the same line.
 			\item 
 			\begin{minted}{\py}
 def newton_sqrt(X,n):
-    try:
-        testval = int(n)
-    except ValueError:
+    if X < 0 or n <= 0:
         return -1
     else:
-        if X < 0 or n <= 0 or testval != n:
-            return -1
+        R1 = 10
+        if n == 1:
+            return R1
         else:
-            R1 = 10
-            if n == 1:
-                return R1
-            else:
-                R = newton_sqrt(X,n-1)
-                Rn = 0.5*((R**2+X)/R)
-                return Rn
-
-"""
-Note: I use a try statement, but if we assume
-n was an integer, this will not be necessary.
-""" 
+            R = newton_sqrt(X,n-1)
+            Rn = 0.5*((R**2+X)/R)
+            return Rn
 			\end{minted}
 			\item
 			\begin{minted}{\py}
@@ -363,7 +343,7 @@ while check == 0:
         x.pop()
         rods[xind] = x
         rods[yind] = y
-        print('Mode made. Below is the current game state.')
+        print('Move made. Below is the current game state.')
     else:
         print('Invalid move. Below is the current game state.')
     

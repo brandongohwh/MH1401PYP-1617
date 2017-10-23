@@ -183,7 +183,9 @@
 		1 & 2 & 3\\4 & 5 & 6\\7 & 8 & 9
 		\end{pmatrix*}
 		\end{equation*}
-		what is the result of the following command?\vspace*{1em}
+		what is the result of the following commands?\vspace*{1em}
+		
+		\texttt{import numpy as np}
 		
 		\texttt{np.sum(mat[0,2]*mat[0,:]))}
 		
@@ -228,14 +230,14 @@
 				\hline
 			\end{tabular}
 		\end{table}
-		For example, if a citizen has an income of $45,000$ SGD, he will be in the 10\% rate section, so he will pay $45,000\times 0.1 = 4,500$ SGD. Write a function \ttx{income\_tax} that will take as input the income of the citizen, and that will return the income tax amount he has to pay. Assume that the income value input is always an integer.
+		For example, if a citizen has an income of $45,000$ SGD, he will be in the 10\% rate section, so he will pay $45,000\times 0.1 = 4,500$ SGD. Write a function \ttx{income\_tax} that will take as input the income of the citizen, and that will return the income tax amount he has to pay. Assume that the income value input is always a positive integer.
 		
 		
 		\item In Singapore (and in many other countries), the rule is slightly more complex as the income is taxed in layers, with a higher tax rate applied to each successive layer. Using the same Table as before, a citizen will pay a 0\% tax rate for its first $20,000$ SGD, then a 5\% tax rate for the next $20,000$ SGD, then a 10\% tax rate for its next $60,000$ SGD, etc.
 		
 		For example, if a citizen has an income of $145,000$ SGD, the first $20,000$ SGD are taxed at a 0\% tax rate, then the next $20,000$ SGD are taxed at a 5\% tax rate, then the next $60,000$ SGD are taxed at a 10\% rate, and finally the remaining $45,000$ SGD are taxed at a 15\% rate. In total, he would have to pay $(20,000\times 0 + 20,000\times 0.05 + 60,000 \times 0.1 + 45,000\times 0.15) = 13,750$ SGD.
 		
-		Write again a function \ttx{income\_tax\_sg} that will take as input the income of the citizen, and that will return the income tax amount he has to pay for this new tax system. Assume that the income value input is always an integer.
+		Write again a function \ttx{income\_tax\_sg} that will take as input the income of the citizen, and that will return the income tax amount he has to pay for this new tax system. Assume that the income value input is always a positive integer.
 	\end{enumerate}
 \end{ques}
 
@@ -248,7 +250,9 @@
 	%		Whose fleece was sheared by Lan\\
 	%		She needed it for Bio lab\\
 	%		But her experiment would not run
-	Newton's method is a method for finding successively better approximations to the roots (or zeroes) of a real-valued function. It can be used to easily find a good approximation of the square root of a number $X\geq 0$. Let $R_1 > 0$ be a rather close approximation of $\sqrt{X}$, then $R_2 = \frac{1}{2}\bigbracket{\frac{R_1^2+X}{R_1}}$ offers an even better approximation of $\sqrt{X}$.
+	Newton's method is a method for finding successively better approximations to the roots (or zeroes) of a real-valued function. It can be used to easily find a good approximation of the square root of a number $X\geq 0$. Let $R_1 > 0$ be a rather close approximation of $\sqrt{X}$, then $R_2 = \frac{1}{2}\bigbracket{\frac{R_1^2+X}{R_1}}$ offers an even better approximation of $\sqrt{X}$.\vspace*{1em}
+	
+	Assume that $X$ has been initialised as a float and $n$ has been initialised as an integer.
 	
 	\begin{enumerate}[(i)]
 		\item Write a \textbf{recursive} function \ttx{newton\_sqrt(X,n)} that will return the $n$-th approximation of $\sqrt{X}$ using Newton's method (starting with $R_1 = 10$ as first approximation). As error check, the function returns $-1$ when $X$ is negative or when $n$ is not a positive integer.
