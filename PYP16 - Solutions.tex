@@ -241,7 +241,7 @@ def income_tax_sg(income):
     elif income <= 40000:
         return 0.05 * (income-20000)
     elif income <= 100000:
-        return 0.05 * 20000 + 0.1 * (income - 60000)
+        return 0.05 * 20000 + 0.1 * (income - 40000)
     elif income <= 200000:
         return 0.05 * 20000 + 0.1 * 60000 + 0.15 * \
         (income - 100000)

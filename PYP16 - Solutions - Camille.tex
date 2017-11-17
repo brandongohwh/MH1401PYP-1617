@@ -286,6 +286,9 @@ def newton_sqrt(X,n):
 import math
 
 def newton_sqrt_approx(X,a):
+    if newton_sqrt(X,1) == -1
+        print('Error in X value')
+        return (1,-1)
     result = a + math.sqrt(X) + 1
     counter = 0
     while abs(result - math.sqrt(X)) > a:
