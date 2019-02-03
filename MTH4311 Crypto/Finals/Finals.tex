@@ -1,0 +1,185 @@
+\documentclass[12pt]{article}
+\usepackage{fancyhdr}
+\usepackage{amsmath,amsfonts,enumerate}
+\usepackage{color,graphicx}
+\pagestyle{fancy}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Do your customization here
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\masunitnumber}{MH4311}
+\newcommand{\examdate}{December 2017}
+\newcommand{\academicyear}{2017-2018}
+\newcommand{\semester}{I}
+\newcommand{\coursename}{Cryptography}
+\newcommand{\numberofhours}{2}
+
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\FF}{\mathbb{F}}
+%\DeclareMathOperator{\diam}{diam}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Don't touch anything from here till instructions
+% to candidates
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{}
+\rhead{}
+\chead{{\bf NANYANG TECHNOLOGICAL UNIVERSITY}}
+\lfoot{}
+\rfoot{}
+\cfoot{}
+\begin{document}
+\setlength{\headsep}{5truemm}
+\setlength{\headheight}{14.5truemm}
+\setlength{\voffset}{-0.45truein}
+\renewcommand{\headrulewidth}{0.0pt}
+\begin{center}
+SEMESTER \semester\ EXAMINATION \academicyear
+\end{center}
+\begin{center}
+{\bf \masunitnumber\ -- \coursename}
+\end{center}
+\vspace{20truemm}
+
+\noindent \examdate\hspace{55truemm} TIME ALLOWED: \numberofhours\ HOURS
+
+\vspace{19truemm}
+\hrule
+\vspace{19truemm}
+
+\noindent\underline{INSTRUCTIONS TO CANDIDATES}
+\vspace{8truemm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Adjust your instructions here
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{enumerate}
+\item This examination paper contains {\bf FOUR (4)} questions and comprises 
+{\bf FOUR (4)} printed pages.
+
+\item Answer all questions. 
+The marks for each question are indicated at the beginning of each question.
+
+
+\item Answer each question beginning on a {\bf FRESH} page of the answer book.
+
+\item This is a {\bf RESTRICTED OPEN BOOK} exam. You are allowed to bring into the examination hall {\bf ONE (1)} piece of A4-size paper written or printed on both sides.
+
+\item Candidates may use calculators. However, they should write down systematically the steps in the workings.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% leave this as it is
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\lhead{}
+\rhead{\masunitnumber}
+\chead{}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+\setlength{\footskip}{45pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% put your exam questions here
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\paragraph{Question 1.}   Hash function and MAC\hfill (20 marks)
+\begin{enumerate}[(a)]
+\itemsep 0em
+    \item SHA-256 is applied to hash a message with length of 3000 bits. How many compression function operations are needed in the hashing?{\vspace{-0.5em}\begin{flushright} (5 marks)\end{flushright}}
+    \item HMAC-SHA-256 is applied to compute the authentication tag of a message with length of 3000 bits. How many compression function operations are needed?{\vspace{-0.5em}\begin{flushright} (5 marks)\end{flushright}}
+    \item At a website, each user's password \textit{P} is hashed together with a salt \textit{S} into a password image \textit{PI}. The password images are stored at the website. Suppose that each salt is a 256-bit random number. The following algorithm is used to hash the password and the salt:\\\\$\begin{aligned}
+    t1&=\textit{SHA--}256(P)\oplus S;\\
+    t2&=\textit{SHA--}256(t1)\oplus P;\\
+    t3&=\textit{SHA--}256(t2)\oplus t1;
+\\
+t4&=\textit{SHA--}256(t3)\oplus t2;\\
+PI&=t3||t4;
+    \end{aligned}$\\\\\\
+    Is this password hashing algorithm secure? Please justify your answer.{\vspace{-0.5em}\begin{flushright} (10 marks)\end{flushright}}
+\end{enumerate}
+
+\paragraph{Question 2.}\hfill (15 marks)
+\begin{enumerate}[(a)]
+\item In AES, the irreducible polynomial with binary coefficients, $x^8+x^4+x^3+x+1$, is used to define $GF(2^8)$. Find the inverse of 5 in this field.{\vspace{-0.5em}\begin{flushright} (10 marks)\end{flushright}}
+\item Suppose that you are required to implement AES to encrypt files on your computer. The encryption and decryption is provided by the user. When a user inputs the decryption key, your program should check whether the key is correct or not, and the decryption is performed only when the key is correct. Briefly explain how to implement it.
+{\vspace{-0.5em}\begin{flushright} (5 marks)\end{flushright}}
+\end{enumerate}
+
+\newpage 
+
+
+\paragraph{Question 3.}\hfill (20 marks)
+\begin{enumerate}[(a)]
+\item In a toy RSA encryption scheme, the public key $(n,e)$, the private key is $d$. It is given that $n=3149=47\times 67$. You are required to generate a pair $(e,d)$.
+{\vspace{-0.5em}\begin{flushright} (10 marks)\end{flushright}}
+\item Factorise $n=84923$ using the following relations:
+\end{enumerate}
+Consider the following interpolation problem. Let 
+$$p(x) = a_{n-1} x^{n-1} +  a_{n-2} x^{n-2}
++ \cdots + a_1 x + a_0$$ be a polynomial. The graph of the corresponding
+function $x\mapsto p(x)$ passes through the
+points $(x_0, y_0), (x_1, y_1), \dots, (x_{n-1}, y_{n-1})$.
+\noindent Adam wrote the following Sage code to return the list $[a_{n-1},\dots,a_0]$
+of coefficients of the polynomial $p(x)$.
+Here, \verb|ylist| is the list $[y_0, y_1, \dots, y_{n-1}]$ and
+\verb|xlist| is the list $[x_0, x_1, \dots, x_{n-1}]$.
+\begin{verbatim}
+def get_coeff(xlist, ylist):
+    n = len(xlist)
+    def f(i, j):
+        return xlist[i]^j
+    M = matrix(RDF, n, n, f)
+    yvec = vector(RDF, ylist)
+    return M.solve_right(yvec)
+\end{verbatim}
+\begin{enumerate}[(i)]
+    \item Adam is getting an incorrect answer   from \verb|get_coeff| when he
+    is trying to get the coefficients of a degree two polynomial which
+    passes through the points $(1, 5), (2, 10), (3, 17)$. Find the error(s) in
+    the function \verb|get_coeff| due to which Adam is getting the
+    incorrect answer. Give the corrections.
+    \item Is there any degree 2 polynomial $p(x)$ for which the
+    \emph{incorrect} function \verb|get_coeff| would still give a correct
+    solution? If so, then give an example of such a polynomial. If such
+    a polynomial cannot be obtained, explain why this is the case.
+\end{enumerate}
+
+\bigskip
+\bigskip
+\newpage 
+
+\paragraph{Question 4.}\hfill (20 marks)\\
+Eve decided to compute a certain function using recursion. The function Eve
+wrote is the following: 
+\begin{verbatim}
+def compute(a, b):
+    if a < 0 or b < 0 or a < b:
+        return 0
+    if b == 0:
+        return 1
+    return a*compute(a-1, b-1)/b
+\end{verbatim}
+\begin{enumerate}[(i)]
+    \item What mathematical function is Eve's function \verb|compute()|
+    evaluating?
+    \item Write a non-recursive version of Eve's function \verb|compute()|.
+\end{enumerate}
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+\paragraph{Question 5.}\hfill (20 marks)\\
+Let $\pi$ be a permutation of the set $I=\{0,\dots,n-1\}$.  The {\em orbits} of
+$\pi$ on $I$ are the  equivalence classes of the binary relation $\equiv_{\pi}$ on
+$I$, so that $x\equiv_{\pi} y$ if and only if there exist $i\geq 0$ such that
+$\pi^i(x)=y$. Here $\pi^i$ denotes the $i$-th iteration of $\pi$, i.e.
+$\pi^0(x)=x$, 
+$\pi^1(x)=\pi(x)$, $\pi^2(x)=\pi(\pi(x))$, etc.  Write a Sage function that
+takes $\pi$ as a list of length $n$ of numbers in $I$ and returns the list of
+lengths of the orbits of $\pi$ on $I$.
+
+\vfill
+\begin{center}{\bf END OF PAPER}\end{center}
+\end{document}
