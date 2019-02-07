@@ -19,6 +19,7 @@
 \newcommand{\CC}{\mathbb{C}}
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\FF}{\mathbb{F}}
+\newcommand{\EOQ}{\hfill $\square$}
 %\DeclareMathOperator{\diam}{diam}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Don't touch anything from here till instructions
@@ -36,7 +37,7 @@
 \setlength{\voffset}{-0.45truein}
 \renewcommand{\headrulewidth}{0.0pt}
 \begin{center}
-SEMESTER \semester\ EXAMINATION \academicyear
+SEMESTER \semester\ EXAMINATION \academicyear ~SUGGESTED SOLUTION
 \end{center}
 \begin{center}
 {\bf \masunitnumber\ -- \coursename}
@@ -48,7 +49,6 @@ SEMESTER \semester\ EXAMINATION \academicyear
 \vspace{19truemm}
 \hrule
 \vspace{19truemm}
-
 \noindent\underline{INSTRUCTIONS TO CANDIDATES}
 \vspace{8truemm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -83,10 +83,11 @@ The marks for each question are indicated at the beginning of each question.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % put your exam questions here
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\noindent Solutions provided by:
+Brandon Goh -- bgoh008@e.ntu.edu.sg
 \paragraph{Question 1.}   Hash function and MAC\hfill (20 marks)
 \begin{enumerate}[(a)]
-    \item SHA-256 is applied to hash a message with length of 3000 bits. How many compression function operations are needed in the hashing?{\vspace{-1em}\begin{flushright} (5 marks)\end{flushright}}
+    \item SHA-256 is applied to hash a message with length of 3000 bits. How many compression function operations are needed in the hashing?{\vspace{-0.8em}\begin{flushright} (5 marks)\end{flushright}}
     \item HMAC-SHA-256 is applied to compute the authentication tag of a message with length of 3000 bits. How many compression function operations are needed?\hfill (5 marks)
     \item At a website, each user's password \textit{P} is hashed together with a salt \textit{S} into a password image \textit{PI}. The password images are stored at the website. Suppose that each salt is a 256-bit random number. The following algorithm is used to hash the password and the salt:\\\\$\begin{aligned}
     t1&=\textit{SHA--}256(P)\oplus S;\\
@@ -96,7 +97,7 @@ The marks for each question are indicated at the beginning of each question.
 t4&=\textit{SHA--}256(t3)\oplus t2;\\
 PI&=t3||t4;
     \end{aligned}$\\\\\\
-    Is this password hashing algorithm secure? Please justify your answer.{\vspace{-1em}\begin{flushright} (10 marks)\end{flushright}}
+    Is this password hashing algorithm secure? Please justify your answer.{\vspace{-0.8em}\begin{flushright} (10 marks)\end{flushright}}
 \end{enumerate}
 
 \paragraph{Answer}
@@ -111,7 +112,7 @@ $X$: Number of `0's required for padding\\
 64: Length of message stored in 64 bits.\\\\
 Solving the equation for the smallest $\alpha$ and $X$ will tell us that
 \\$\alpha=6$\\$X=7$\\\\
-$\therefore$ 6 compression functions are required\hfill $\square$
+$\therefore$ 6 compression functions are required\EOQ
 \item Note that HMAC uses the following compression function:
 \begin{equation*}
 MAC_k(M)=Hash((k'\oplus outerpad)||Hash((k'\oplus innerpad)||M))
@@ -136,7 +137,7 @@ Hashing 768 bits using SHA-256 requires us to solve the equation:
 \end{equation*}
 Solving the equation for the smallest $\alpha$ and $X$ will tell us that
 \\$\alpha=2$\\$X=191$\\\\
-$\therefore$ 2 compression functions are required.\\\\In total, 9 compression functions are required to hash 3000 bits in HMAC-SHA-256.\hfill $\square$
+$\therefore$ 2 compression functions are required.\\\\In total, 9 compression functions are required to hash 3000 bits in HMAC-SHA-256.\EOQ
 \item This is a very simple question if you take the effort to rewrite the equations given.\\\\Now, to obtain \textit{P} we can rewrite the equations into the following form.
 \begin{equation*}
 \begin{split}
@@ -165,11 +166,11 @@ t4&=\text{SHA--256}(t3)\oplus t2\\
 \Rightarrow t2&=\text{SHA--256}(t3)\oplus t4
 \end{split}
 \end{equation*}
-From this point, we can obtain the values of $t2$ and $t1$. Note that the SHA-256 values can easily be calculated by using a program (as the algorithm is standardised). Substituting the respective values will now allow us to obtain $P$ in its plaintext form. This demonstration shows you that this algorithm is extremely insecure (and the little effort required from an attacker to obtain passwords).\hfill $\square$
+From this point, we can obtain the values of $t2$ and $t1$. Note that the SHA-256 values can easily be calculated by using a program (as the algorithm is standardised). Substituting the respective values will now allow us to obtain $P$ in its plaintext form. This demonstration shows you that this algorithm is extremely insecure (and the little effort required from an attacker to obtain passwords).\EOQ
 \end{enumerate}
 \paragraph{Question 2.}   AES\hfill (15 marks)
 \begin{enumerate}[(a)]
-\item In AES, the irreducible polynomial with binary coefficients, $x^8+x^4+x^3+x+1$, is used to define $GF(2^8)$. Find the inverse of 5 in this field.{\vspace{-1em}\begin{flushright} (10 marks)\end{flushright}}
+\item In AES, the irreducible polynomial with binary coefficients, $x^8+x^4+x^3+x+1$, is used to define $GF(2^8)$. Find the inverse of 5 in this field.{\vspace{-1.2em}\begin{flushright} (10 marks)\end{flushright}}
 \item Suppose that you are required to implement AES to encrypt files on your computer. The encryption and decryption is provided by the user. When a user inputs the decryption key, your program should check whether the key is correct or not, and the decryption is performed only when the key is correct. Briefly explain how to implement it.\hfill (5 marks)
 \end{enumerate}
 \paragraph{Answer}
@@ -181,8 +182,8 @@ From this point, we can obtain the values of $t2$ and $t1$. Note that the SHA-25
 x^8+x^4+x^3+x+1\mod x^2+1=(x^6+x^4+x)(x^2+1)+1
 \end{equation*}
 $\therefore (x^2+1)^{-1}=(x^6+x^4+x)$.\\
-$x^6+x^4+x$ converted to hex(adecimal) form is \{52\}.\hfill $\square$
-\item Hash the key and store the digest together with the ciphertext.\hfill $\square$
+$x^6+x^4+x$ expressed in hex(adecimal) form is \{52\}.\EOQ
+\item Hash the key and store the digest together with the ciphertext.\EOQ
 \end{enumerate}
 \paragraph{Question 3.}   RSA\hfill (20 marks)
 \begin{enumerate}[(a)]
@@ -232,7 +233,7 @@ ed&\equiv 1\mod \varphi(n)\\
 \because d&=e^{-1}\\\therefore d&=5^{-1}\\&=-607\\&=2429\mod 3036
 \end{split}
 \end{equation*}
-For $n=3149$, we can take a pair $(e,d)$ as $(5,2429).$\hfill $\square$
+For $n=3149$, we can take a pair $(e,d)$ as $(5,2429).$\EOQ
 \item This time the question on Dixon square algorithm is very easy. The key trick to this question is to make sure that for any number ($>2$) of formulas that you multiply together, the \textbf{exponent} for each prime number on the RHS \textbf{must be even}. 
 \begin{itemize}
 \item First equation, 59 does not appear elsewhere so this equation is not considered.
@@ -261,7 +262,7 @@ Using 20712 and 16800, we can obtain both factors easily at this stage. (Steps o
 \gcd(20712-16800,84923)&=163
 \end{split}
 \end{equation*}
-Two factors, 521 and 163 are the values obtained from the algorithm. You can easily check that $521\times 163=84923$.\hfill $\square$
+Two factors, 521 and 163 are the values obtained from the algorithm. You can easily check that $521\times 163=84923$.\EOQ
 \item We know that $k_0$, $k_1$, $n$ are publicly known and $G$, $H$ are standard functions. There is also mention that the random number $r$ in OAEP is changed to use the digest of SHA-256($P$). If we write the equations to obtain $m$ and $r$ from $X$ and $Y$, then we see that it can be written in the following form.
 \begin{equation} \label{eqn1}
 \begin{split}
@@ -276,14 +277,14 @@ m||000&=X\oplus G(r)
 \end{split}
 \end{equation}
 
-When considering both equations \eqref{eqn1} and \eqref{eqn2}, for any arbitrary plaintext $P$, $m$, $r$, $X$ and $Y$ are completely different. However, when duplicate plaintexts are sent, $r$ is \textbf{NOT} random. Furthermore, $X$ and $Y$ will be the same. The attacker only needs to look out for duplicate $X$ and $Y$ for him to easily reverse the modified OAEP encryption (Reversal is simple enough). \hfill $\square$
+When considering both equations \eqref{eqn1} and \eqref{eqn2}, for any arbitrary plaintext $P$, $m$, $r$, $X$ and $Y$ are completely different. However, when duplicate plaintexts are sent, $r$ is \textbf{NOT} random. Furthermore, $X$ and $Y$ will be the same. The attacker only needs to look out for duplicate $X$ and $Y$ for him to easily break the modified OAEP encryption (Reversal is simple enough). \EOQ
 \item At first sight, one might assume that the high current usage indicates a value of `1' while a low current usage indicates a value of `0'. However, we are given that it is a \textbf{8}-bit key. It is also crucial to note that during decryption, there are times where there are no computations taking place (executing code not relating to square-and-multiply). No device can operate at `0' current, so it can be safely assumed that the low current usage is the baseline current required for operation of the computational device.\\\\With that, we focus on the peaks of the graph. In fact, there are 8 of it. With careful observation, you will notice that some peaks are longer than others, indicating a longer period where a higher current is drawn.
 \begin{figure}[H]
 \centering
 \includegraphics[width=1\linewidth]{Capture}
 \label{fig:capture2}
 \end{figure}
-Going back to the square-and-multiply algorithm, when the value of the bit is `0', only 1 multiplication operation is performed. When the value of the bit is `1', 2 multiplication operations are performed. When operations are performed, power is required to perform the computations. Hence, if the bits were written in the order shown from the graph, it will give us this result: \textbf{01110011}.\\\\This is not the final answer since the question states that the square-and-multiply operation is performed in a right-to-left order. Therefore, the bits must be reversed and so the private key $d$ has the value \textbf{11001110} in binary or \{CE\} in hex. (Leaving your answer in decimal, binary or hex is \underline{OK} but state the base where necessary).\hfill $\square$
+Going back to the square-and-multiply algorithm, when the value of the bit is `0', only 1 multiplication operation is performed. When the value of the bit is `1', 2 multiplication operations are performed. When operations are performed, power is required to perform the computations. Hence, if the bits were written in the order shown from the graph, it will give us this result: \textbf{01110011}.\\\\This is not the final answer since the question states that the square-and-multiply operation is performed in a right-to-left order. Therefore, the bits must be reversed and so the private key $d$ has the value \textbf{11001110} in binary or \{CE\} in hex. (Leaving your answer in decimal, binary or hex is \underline{OK} but state the base where necessary).\EOQ
 \end{enumerate}
 
 \newpage
@@ -291,11 +292,32 @@ Going back to the square-and-multiply algorithm, when the value of the bit is `0
 \begin{enumerate}[(a)]
     \item A 96-bit private key is used in the Digital Signature Algorithm. Please develop an efficient attack to break it.\hfill (10 marks)
     \item In the Digital Signature Algorithm, what is the risk if the same random number is reused to sign different messages?\hfill (5 marks)
-    \item In the Digital Signature Algorithm, the random number used to sign message \textit{M} is generated by applying SHA-256 to hash the key together with the message digest of M. Is this implementation of the Digital Signature Algorithm secure? Please justify your answer.{\vspace{-2.5em}\begin{flushright} (10 marks)\end{flushright}}
+    \item In the Digital Signature Algorithm, the random number used to sign message \textit{M} is generated by applying SHA-256 to hash the key together with the message digest of M. Is this implementation of the Digital Signature Algorithm secure? Please justify your answer.{\vspace{-2.1em}\begin{flushright} (10 marks)\end{flushright}}
 \end{enumerate}
 \paragraph{Answer}
 \begin{enumerate}[(a)]
-\item A 96-bit private key is incredibly weak because it can be solved using discrete logarithm algorithms. Then there are 4 algorithms to choose from. Pollard Rho's algorithm is too complex in this scenario. In any case, Pohlig-Hellman has the lowest complexity class among the 4 algorithms (i.e. time efficient).
+\item A 96-bit private key is incredibly weak because it can be solved using discrete logarithm algorithms. Then there are 4 algorithms to choose from. Pollard Rho's algorithm is too complex in this scenario. In any case, Pohlig-Hellman has the lowest complexity class among the 4 algorithms (i.e. time efficient).\\\\
+\textbf{Pohlig-Hellman Algorithm}:\\\\
+Suppose that $n=p-1=p_1p_2\cdots p_i$\\
+Find $x_i\mod p_i \text{~~}\forall i$\\
+Solve for $x$ using Chinese Remainder Theorem\\
+Then let $x=u_i\cdot p_i+v_i$, where $v_i=x\mod p_i$
+\begin{equation*}
+\begin{split}
+g^x&\equiv b\mod p\\
+(g^x)^{\frac{n}{p_i}}&\equiv b^{\frac{n}{p_i}}\mod p\\
+(g^{u_i\cdot p_i+v_i})^{\frac{n}{p_i}}&\equiv b^{\frac{n}{p_i}}\mod p\\
+(g^{v_i})^{\frac{n}{p_i}}&\equiv b^{\frac{n}{p_i}}\mod p\\
+(g^\frac{n}{p_i})^{v_i}&\equiv b^{\frac{n}{p_i}}\mod p
+\end{split}
+\end{equation*}
+Take $g'=g^{\frac{n}{p_i}}$, $b'=b^\frac{n}{p_i}$, then
+\begin{equation*}
+(g')^{v_i}\equiv b'\mod p
+\end{equation*}
+From here, $v_i$ can be obtained using Shank's baby-step giant-step algorithm.\EOQ
+\item If the same number $k$ is reused to sign different messages, then we can set up multiple simultaneous equations to recover the private key $x$. \EOQ
+\item When the random number $k$ is changed to the value of SHA-256($M$), it will still be secure. SHA-256($M$) is a 256-bit output that is fixed, depending on the message. Typically, this means that the number of variables to recover will decrease. However, the nonlinear equations obtained are extremely complicated and solving it to obtain the private key is not as simple.\EOQ
 \end{enumerate}
 \bigskip
 \vfill
