@@ -1,0 +1,460 @@
+\documentclass[12pt]{article}
+\usepackage{fancyhdr}
+\usepackage{amsmath,amsfonts,enumerate,amssymb}
+\usepackage{color,graphicx}
+\usepackage{float}
+\pagestyle{fancy}
+\usepackage{soul} %Strikeout
+\usepackage{minted}
+\usepackage{tikzsymbols}
+\usetikzlibrary{arrows}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Do your customization here
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\masunitnumber}{MH1402}
+\newcommand{\examdate}{MAY 2018}
+\newcommand{\academicyear}{2017-2018}
+\newcommand{\semester}{II}
+\newcommand{\coursename}{Algorithms \& Computing II}
+\newcommand{\numberofhours}{2}
+
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\EOQ}{\hfill $\square$}
+%\DeclareMathOperator{\diam}{diam}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Don't touch anything from here till instructions
+% to candidates
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{}
+\rhead{}
+\chead{{\bf NANYANG TECHNOLOGICAL UNIVERSITY}}
+\lfoot{}
+\rfoot{}
+\cfoot{}
+\begin{document}
+\setlength{\headsep}{5truemm}
+\setlength{\headheight}{14.5truemm}
+\setlength{\voffset}{-0.45truein}
+\renewcommand{\headrulewidth}{0.0pt}
+\begin{center}
+SEMESTER \semester\ EXAMINATION \academicyear ~SUGGESTED SOLUTION
+\end{center}
+\begin{center}
+{\bf \masunitnumber\ -- \coursename}
+\end{center}
+\vspace{20truemm}
+
+\noindent \examdate\hspace{55truemm} TIME ALLOWED: \numberofhours\ HOURS
+
+\vspace{19truemm}
+\hrule
+\vspace{19truemm}
+\noindent\underline{INSTRUCTIONS TO CANDIDATES}
+\vspace{8truemm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Adjust your instructions here
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{enumerate}
+\item This examination paper contains {\bf SEVEN (7)} questions and comprises 
+{\bf FOUR (4)} printed pages.
+
+\item Answer all questions. 
+The marks for each question are indicated at the beginning of each question.
+
+
+\item Answer each question beginning on a {\bf FRESH} page of the answer book.
+
+\item This {\bf IS NOT} an {\bf OPEN BOOK} exam.
+
+\item Candidates may use calculators. However, they should write down systematically the steps in the workings.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% leave this as it is
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\lhead{}
+\rhead{\masunitnumber}
+\chead{}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+\setlength{\footskip}{45pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% put your exam questions here
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent Solutions provided by:
+Brandon Goh -- bgoh008@e.ntu.edu.sg
+\paragraph{Question 1.}
+\begin{enumerate}[(a)]
+    \item Show by mathematical induction that $T(n)=2^{n+1}-1$, given the following definition:\hfill{\bf (6 marks)}\\
+    \begin{align*}
+    T(n)=\left\{
+                    \begin{array}{ll}
+                      1&\quad \text{if }n=0,\\
+                      T(n-1)+2^n&\quad\text{otherwise.}
+                    \end{array}
+                  \right.
+    \end{align*}
+    \item What is the complexity of the following piece of Python code in Big-Oh notation? \hfill {\bf 5 marks}
+    \begin{minted}[frame=single, framesep=5pt]{python}
+sum = 0
+for i in range(n**2):
+    for j in range(i):
+        sum += j
+    \end{minted}
+\end{enumerate}
+
+\paragraph{Answer}
+\begin{enumerate}[(a)]
+\item Take the LHS as the given equation and RHS as $T(n)=2^{n+1}-1$.\\\\{\bf Base Case}~~~~$n=0$\\\\(LHS) $T(0)=1$\\(RHS) $T(0)=2^1-1=1$\\\\LHS=RHS, $\therefore$ Base case is true.\\\\{\bf Hypothesis}~~~~$n=k$\\\\Assume that $n=k$ is true, then\\
+\begin{equation*}
+T(k)=T(k-1)+2^k=2^{k+1}-1
+\end{equation*}\\
+{\bf Induction}~~~~$n=k+1$\\\\To prove that $n=k+1$ is true, LHS must be equal to RHS.\\\\(RHS) $T(k+1)=2^{k+2}-1$\\(LHS) $T(k+1)=T(k)+2^k\\\vspace{0.04cm}
+\text{\hspace{2.83cm}}=(2^{k+1}-1)+2^{k+1}\\\vspace{0.04cm}
+\text{\hspace{2.83cm}}=2\cdot 2^{k+1}-1\\\vspace{0.04cm}
+\text{\hspace{2.83cm}}=2^{k+2}-1\\\vspace{0.04cm}
+\text{\hspace{2.83cm}}=\text{(RHS)}$\\\\From the above, $n=0$ and $n=k$ are true \\$\Rightarrow$ $n=k+1$ is also true. Then by mathematical induction, the equation is true for all $n\in\mathbb{N}_0$.
+\EOQ
+\item Break the question into 2 blocks:\\\\
+Block 1:\\
+\verb|sum = 0| $\rightarrow$ 1 operation.\\\\Block 2:\\
+\verb|for i in range(n**2):|\\\hspace*{0.6cm}\verb|for j in range(i):|\\\hspace*{1.2cm}\verb|sum += j|\\\\It is important to note that \verb|sum += j| constitutes as 1 operation per execution.\\\\Start by considering small cases.
+\begin{enumerate}[(1)]
+\item When $n=0$, there is no execution of the \textbf{outer} loop.
+\item When $n=1$, $i=0$ only $\Rightarrow$ there is no execution of \textbf{inner} loop.
+\item When $n=2$, $i\in\{0,1,2,3\}$
+\begin{itemize}
+\item \verb|j in range(0)| $\Rightarrow$ inner loop is not executed.
+\item \verb|j in range(1)| $\Rightarrow$ inner loop is executed \textbf{once}.
+\item \verb|j in range(2)| $\Rightarrow$ inner loop is executed \textbf{twice}.
+\item \verb|j in range(3)| $\Rightarrow$ inner loop is executed \textbf{thrice}.
+\end{itemize}
+Total executions: $\sum\limits_{x=1}^{3}x=6$
+\end{enumerate}
+\item When $n=3$, $i\in\{0,1,2,3,4,5,6,7,8\}$
+\begin{itemize}
+\item \verb|j in range(0)| $\Rightarrow$ inner loop is not executed.
+\item \verb|j in range(1)| $\Rightarrow$ inner loop is executed \textbf{once}.
+\item \verb|j in range(2)| $\Rightarrow$ inner loop is executed \textbf{twice}.
+\item {$\vdots$}
+\item \verb|j in range(8)| $\Rightarrow$ inner loop is executed \textbf{eight} times.
+\end{itemize}
+Total executions: $\sum\limits_{x=1}^{8}x=36$
+\end{enumerate}
+Using the inner loops, we determine that the number of executions can be simplified to the following:
+\begin{equation*}
+\sum_{x=1}^{\max(i)}x
+\end{equation*}
+Now consider the outer loop, the number of executions of the inner loop is based on the value of $n$. Furthermore, $i$ depends on $n$. The formula for the total number of executions can be written in the following form.
+\begin{equation*}
+\sum_{j=1}^{n}\sum_{x=1}^{j^2-1}x
+\end{equation*}
+Solving the double summation yields the following the result.
+\begin{equation*}
+\begin{split}
+\sum_{j=1}^{n}\sum_{x=1}^{j^2-1}x&=\sum_{j=1}^{n}\frac{(j^2-1)(j^2)}{2}\\&=\frac{1}{20}(n-1)(n)(n+1)(n+2)(2n+1)\\
+&=O(n^5)
+\end{split}
+\end{equation*}
+Note: You are \textbf{NOT} required to know the result from the double summation. Instead, you are expected to know that $\sum\limits_{x=1}^{n}x^a=O(x^{a+1})$ where $a\in\mathbb{N}_0$.\\\\The loop gives us a time complexity of $O(n^5)$, so the addition of the 1 operation from outside the loop ($O(1)$) will not change the time complexity of the algorithm.\EOQ
+\paragraph{Question 2.} Given the following binary search tree
+
+\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}	
+		%Depth 0
+		\draw (0,0) circle (0.4cm) node {\bf G};
+		\draw (-0.279,-0.279)--(-1.721,-1.221);
+		\draw (0.279,-0.279)--(1.721,-1.221);
+		%Depth 1
+		\draw (-2,-1.5) circle(0.4cm) node {\bf D};
+		\draw (2,-1.5) circle(0.4cm) node {\bf L};
+		\draw(-2.214,-1.83)--(-2.784,-2.67);
+		\draw(1.786,-1.83)--(1.216,-2.67);
+		\draw(2.214,-1.83)--(2.784,-2.67);
+		%Depth 2
+		\draw (-3,-3) circle(0.4cm) node {\bf A};
+		\draw (1,-3) circle(0.4cm) node {\bf J};
+		\draw (3,-3) circle(0.4cm) node {\bf M};
+		\draw(-2.852,-3.364)--(-2.62,-4.124);
+		\draw(1.148,-3.364)--(1.38,-4.124);
+		\draw(0.852,-3.364)--(0.62,-4.124);
+		\draw(3.148,-3.364)--(3.38,-4.124);
+		%Depth 3
+		\draw (-2.5,-4.5) circle(0.4cm) node {\bf C};
+		\draw (0.5,-4.5) circle(0.4cm) node {\bf I};
+		\draw (1.5,-4.5) circle(0.4cm) node {\bf K};
+		\draw (3.5,-4.5) circle(0.4cm) node {\bf N};
+		
+		\end{tikzpicture}
+		\caption{Binary Search Tree}
+		\label{fig:BST}
+	\end{figure}
+
+\begin{enumerate}[(a)]
+\item What is the sequence of nodes by Euler's Traversal? \hfill {\bf (8 marks)}
+\item Draw the resultant tree after removing node ``L''. \hfill {\bf (6 marks)}
+\end{enumerate}
+\paragraph{Answer}
+\begin{enumerate}[(a)]
+\item $G\rightarrow D\rightarrow A\rightarrow C\rightarrow A\rightarrow D\rightarrow G\rightarrow L\rightarrow J\rightarrow I\rightarrow J\rightarrow K\rightarrow J\rightarrow L\rightarrow M\rightarrow N\rightarrow M\rightarrow L\rightarrow G$ \EOQ
+\item Step 1: L has 2 child nodes, so the key must be swapped with its \textbf{successor}.
+\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}	
+		%Depth 0
+		\draw (0,0) circle (0.4cm) node {\bf G};
+		\draw (-0.279,-0.279)--(-1.721,-1.221);
+		\draw (0.279,-0.279)--(1.721,-1.221);
+		%Depth 1
+		\draw (-2,-1.5) circle(0.4cm) node {\bf D};
+		\draw[fill=yellow] (2,-1.5) circle(0.4cm) node {\bf M};
+		\draw(-2.214,-1.83)--(-2.784,-2.67);
+		\draw(1.786,-1.83)--(1.216,-2.67);
+		\draw(2.214,-1.83)--(2.784,-2.67);
+		%Depth 2
+		\draw (-3,-3) circle(0.4cm) node {\bf A};
+		\draw (1,-3) circle(0.4cm) node {\bf J};
+		\draw[fill=yellow] (3,-3) circle(0.4cm) node {\bf L};
+		\draw(-2.852,-3.364)--(-2.62,-4.124);
+		\draw(1.148,-3.364)--(1.38,-4.124);
+		\draw(0.852,-3.364)--(0.62,-4.124);
+		\draw(3.148,-3.364)--(3.38,-4.124);
+		%Depth 3
+		\draw (-2.5,-4.5) circle(0.4cm) node {\bf C};
+		\draw (0.5,-4.5) circle(0.4cm) node {\bf I};
+		\draw (1.5,-4.5) circle(0.4cm) node {\bf K};
+		\draw (3.5,-4.5) circle(0.4cm) node {\bf N};
+		
+		\end{tikzpicture}
+		\caption{Binary Search Tree After Step 1}
+		\label{fig:BSTS1}
+	\end{figure}
+	Step 2: L now has 1 child node, so swap the key with the child.
+	\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}	
+			%Depth 0
+			\draw (0,0) circle (0.4cm) node {\bf G};
+			\draw (-0.279,-0.279)--(-1.721,-1.221);
+			\draw (0.279,-0.279)--(1.721,-1.221);
+			%Depth 1
+			\draw (-2,-1.5) circle(0.4cm) node {\bf D};
+			\draw (2,-1.5) circle(0.4cm) node {\bf M};
+			\draw(-2.214,-1.83)--(-2.784,-2.67);
+			\draw(1.786,-1.83)--(1.216,-2.67);
+			\draw(2.214,-1.83)--(2.784,-2.67);
+			%Depth 2
+			\draw (-3,-3) circle(0.4cm) node {\bf A};
+			\draw (1,-3) circle(0.4cm) node {\bf J};
+			\draw[fill=yellow] (3,-3) circle(0.4cm) node {\bf N};
+			\draw(-2.852,-3.364)--(-2.62,-4.124);
+			\draw(1.148,-3.364)--(1.38,-4.124);
+			\draw(0.852,-3.364)--(0.62,-4.124);
+			\draw(3.148,-3.364)--(3.38,-4.124);
+			%Depth 3
+			\draw (-2.5,-4.5) circle(0.4cm) node {\bf C};
+			\draw (0.5,-4.5) circle(0.4cm) node {\bf I};
+			\draw (1.5,-4.5) circle(0.4cm) node {\bf K};
+			\draw[fill=yellow] (3.5,-4.5) circle(0.4cm) node {\bf L};
+			
+			\end{tikzpicture}
+			\caption{Binary Search Tree After Step 2}
+			\label{fig:BSTS2}
+		\end{figure}
+		Step 3: L has no child nodes, so remove the node from the BST.
+		\begin{figure}[H]
+					\centering
+					\begin{tikzpicture}	
+					%Depth 0
+					\draw (0,0) circle (0.4cm) node {\bf G};
+					\draw (-0.279,-0.279)--(-1.721,-1.221);
+					\draw (0.279,-0.279)--(1.721,-1.221);
+					%Depth 1
+					\draw (-2,-1.5) circle(0.4cm) node {\bf D};
+					\draw (2,-1.5) circle(0.4cm) node {\bf M};
+					\draw(-2.214,-1.83)--(-2.784,-2.67);
+					\draw(1.786,-1.83)--(1.216,-2.67);
+					\draw(2.214,-1.83)--(2.784,-2.67);
+					%Depth 2
+					\draw (-3,-3) circle(0.4cm) node {\bf A};
+					\draw (1,-3) circle(0.4cm) node {\bf J};
+					\draw (3,-3) circle(0.4cm) node {\bf N};
+					\draw(-2.852,-3.364)--(-2.62,-4.124);
+					\draw(1.148,-3.364)--(1.38,-4.124);
+					\draw(0.852,-3.364)--(0.62,-4.124);
+					%Depth 3
+					\draw (-2.5,-4.5) circle(0.4cm) node {\bf C};
+					\draw (0.5,-4.5) circle(0.4cm) node {\bf I};
+					\draw (1.5,-4.5) circle(0.4cm) node {\bf K};
+					
+					\end{tikzpicture}
+					\caption{Final Binary Search Tree}
+					\label{fig:BSTF}
+				\end{figure}\EOQ
+\end{enumerate}
+\paragraph{Question 3.} Given the node class implementation below:
+\begin{minted}[frame=single, framesep=5pt]{python}
+class Node:
+    def __init__(self, initElement):
+        self.left = None              #left child
+        self.right = None             #right child
+        self.parent = None            #parent
+        self.element = initElement
+\end{minted}
+write in Python a \textit{function} to print the element of all nodes of a binary tree in the order of depth, i.e., the node of depth 0 first (the root), followed by all the nodes of depth 1 (children of the root), then all the nodes of depth 2 (grandchildren of the root) ..., until all the nodes are printed. The function takes the root node of the binary tree as input. You may assume the Queue class is available for use, including functions like:
+\begin{itemize}
+\item Queue(): instantiate an empty queue,
+\item enqueue(Node x): enqueue node x,
+\item dequeue(): dequeue and returns the node removed from queue,
+\item isEmpty(): returns \textit{True} if queue is empty, \textit{False} otherwise.
+\end{itemize}
+Note the input binary tree may or may not be a proper binary tree. \\\text{}\hfill \textbf{(12 marks)}
+\paragraph{Answer}\mbox{}\\\\
+Since the question only requires us to print the nodes in order without any particular formatting, the simple code below satisfies the question.\\
+\begin{minted}{python}
+def TreeOrder(root):
+    A=Queue()                   #Create empty queue A
+    A.enqueue(root)             #Queue the root node
+    while not A.isEmpty():      #The queue is not-empty,
+                                #so there are nodes that 
+                                #still need to be processed
+        P=A.dequeue()           #Remove node for processing
+        print(P.element)        #Print element in the node
+        if P.left!=None:         
+            A.enqueue(P.left)   #Queue left child node if exists
+        if P.right!=None:        
+            A.enqueue(P.right)  #Queue right child node if exists
+    return
+\end{minted}
+\EOQ
+\paragraph{Question 4.} Consider the list L $=[1,4,2,8,6,3,5]$.
+\begin{enumerate}[(a)]
+\item Apply merge-sort algorithm on the list L. Explain with a binary tree the successive recursive calls, and another binary tree the successive merge processes. Assume the left part takes half or one element less, i.e. $\lfloor n/2\rfloor$ when dividing a sub-problem of size $n$. \hfill {\bf (12 marks)}
+\item Apply quick-sort algorithm on the original list L. Explain with a binary tree the sort process and underline the pivots. Assume it is always the second element of current sub-problem selected as the pivot.\\\mbox{}\hfill {\bf (12 marks)}
+\end{enumerate}
+\paragraph{Answer}
+\begin{enumerate}[(a)]
+\item First Binary Tree for Successive Recursive Calls
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}	
+%Depth 0
+\draw[rounded corners=3pt] (-4,0) rectangle node {1   4   2   8   6   3   5} (4,-1) ;
+
+
+\draw[rounded corners=3pt] (-5,-1.5) rectangle node {1   4   2} (-1,-2.5) ;
+\draw[rounded corners=3pt] (1,-1.5) rectangle node {8   6   3   5} (5,-2.5) ;
+\draw[<-,line width=0.6mm] (-3,-1.5)--(-3,-1);
+\draw[<-,line width=0.6mm] (3,-1.5)--(3,-1);
+
+
+\draw[rounded corners=3pt] (-5.5,-3) rectangle node {1} (-3.5,-4) ;
+\draw[rounded corners=3pt] (-2.5,-3) rectangle node {4   2 } (-0.5,-4) ;
+\draw[rounded corners=3pt] (0.5,-3) rectangle node {8   6} (2.5,-4) ;
+\draw[rounded corners=3pt] (3.5,-3) rectangle node {3   5} (5.5,-4) ;
+\draw[<-, line width=0.6mm] (-4.5,-3)--(-4.5,-2.5);
+\draw[<-, line width=0.6mm] (-1.5,-3) -- (-1.5,-2.5);
+\draw[<-, line width=0.6mm] (1.5,-3) -- (1.5,-2.5);
+\draw[<-, line width=0.6mm] (4.5,-3)--(4.5,-2.5);
+
+\draw[rounded corners=3pt] (-2.75,-4.5) rectangle node {4} (-1.75,-5.5) ;
+\draw[rounded corners=3pt] (-0.25,-4.5) rectangle node {2} (-1.25,-5.5) ;
+\draw[rounded corners=3pt] (0.25,-4.5) rectangle node {8} (1.25,-5.5) ;
+\draw[rounded corners=3pt] (1.75,-4.5) rectangle node {6} (2.75,-5.5) ;
+\draw[rounded corners=3pt] (3.25,-4.5) rectangle node {3} (4.25,-5.5) ;
+\draw[rounded corners=3pt] (4.75,-4.5) rectangle node {5} (5.75,-5.5) ;
+\draw[<-, line width=0.6mm] (-2.25,-4.5)--(-2.25,-4);
+\draw[<-, line width=0.6mm] (-0.75,-4.5)--(-0.75,-4);
+\draw[<-, line width=0.6mm] (0.75,-4.5)--(0.75,-4);
+\draw[<-, line width=0.6mm] (2.25,-4.5)--(2.25,-4);
+\draw[<-, line width=0.6mm] (3.75,-4.5)--(3.75,-4);
+\draw[<-, line width=0.6mm] (5.25,-4.5)--(5.25,-4);
+
+\end{tikzpicture}
+\caption{Binary Tree for Mergesort (Splitting)}
+\label{fig:MS1}
+\end{figure}
+Second Binary Tree for Sorting
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}	
+%Depth 0
+\draw[rounded corners=3pt] (-4,0) rectangle node {1   2   3   4   5   6   8} (4,1) ;
+
+
+\draw[rounded corners=3pt] (-5,1.5) rectangle node {1   2   4} (-1,2.5) ;
+\draw[rounded corners=3pt] (1,1.5) rectangle node {3   5   6   8} (5,2.5) ;
+\draw[->,line width=0.6mm] (-3,1.5)--(-3,1);
+\draw[->,line width=0.6mm] (3,1.5)--(3,1);
+
+
+\draw[rounded corners=3pt] (-5.5,3) rectangle node {1} (-3.5,4) ;
+\draw[rounded corners=3pt] (-2.5,3) rectangle node {2   4} (-0.5,4) ;
+\draw[rounded corners=3pt] (0.5,3) rectangle node {6   8} (2.5,4) ;
+\draw[rounded corners=3pt] (3.5,3) rectangle node {3   5} (5.5,4) ;
+\draw[->, line width=0.6mm] (-4.5,3)--(-4.5,2.5);
+\draw[->, line width=0.6mm] (-1.5,3) -- (-1.5,2.5);
+\draw[->, line width=0.6mm] (1.5,3) -- (1.5,2.5);
+\draw[->, line width=0.6mm] (4.5,3)--(4.5,2.5);
+
+\draw[rounded corners=3pt] (-2.75,4.5) rectangle node {4} (-1.75,5.5) ;
+\draw[rounded corners=3pt] (-0.25,4.5) rectangle node {2} (-1.25,5.5) ;
+\draw[rounded corners=3pt] (0.25,4.5) rectangle node {8} (1.25,5.5) ;
+\draw[rounded corners=3pt] (1.75,4.5) rectangle node {6} (2.75,5.5) ;
+\draw[rounded corners=3pt] (3.25,4.5) rectangle node {3} (4.25,5.5) ;
+\draw[rounded corners=3pt] (4.75,4.5) rectangle node {5} (5.75,5.5) ;
+\draw[->, line width=0.6mm] (-2.25,4.5)--(-2.25,4);
+\draw[->, line width=0.6mm] (-0.75,4.5)--(-0.75,4);
+\draw[->, line width=0.6mm] (0.75,4.5)--(0.75,4);
+\draw[->, line width=0.6mm] (2.25,4.5)--(2.25,4);
+\draw[->, line width=0.6mm] (3.75,4.5)--(3.75,4);
+\draw[->, line width=0.6mm] (5.25,4.5)--(5.25,4);
+
+\end{tikzpicture}
+\caption{Binary Tree for Mergesort (Merging)}
+\label{fig:MS2}
+\end{figure}
+\item Binary Tree for quicksort
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}	
+%Depth 0
+\draw[rounded corners=3pt] (-4,0) rectangle node {1   \underline{\textbf{4}}   2   8   6   3   5   $\rightarrow$   1   2   3   \underline{\textbf{4}}   5   6   8} (4,-1) ;
+
+\draw[rounded corners=3pt] (-5,-1.5) rectangle node {1   \underline{\textbf{2}}   3   $\rightarrow$   1   \underline{\textbf{2}}   3} (-1,-2.5) ;
+\draw[rounded corners=3pt] (1,-1.5) rectangle node {8   \underline{\textbf{6}}   5   $\rightarrow$   5   \underline{\textbf{6}}   8} (5,-2.5) ;
+\draw[<->,line width=0.6mm] (-3,-1.5)--(-3,-1);
+\draw[<->,line width=0.6mm] (3,-1.5)--(3,-1);
+
+
+\draw[rounded corners=3pt] (-5.5,-3) rectangle node {1   $\rightarrow$   1} (-3.5,-4) ;
+\draw[rounded corners=3pt] (-2.5,-3) rectangle node {3   $\rightarrow$   3} (-0.5,-4) ;
+\draw[rounded corners=3pt] (0.5,-3) rectangle node {5   $\rightarrow$   5} (2.5,-4) ;
+\draw[rounded corners=3pt] (3.5,-3) rectangle node {8   $\rightarrow$   8} (5.5,-4) ;
+\draw[<->, line width=0.6mm] (-4.5,-3)--(-4.5,-2.5);
+\draw[<->, line width=0.6mm] (-1.5,-3) -- (-1.5,-2.5);
+\draw[<->, line width=0.6mm] (1.5,-3) -- (1.5,-2.5);
+\draw[<->, line width=0.6mm] (4.5,-3)--(4.5,-2.5);
+\end{tikzpicture}
+\caption{Binary Tree for Quicksort}
+\label{fig:QS}
+\end{figure}
+\noindent
+Step \circled{1} \\Identify pivot\\\\
+Step \circled{2} \\Split the values into the left and right subtrees respectively depending on whether the values are \\less than ($<$) or greater than ($>$) the pivot (while preserving the order).\\\\
+Step \circled{3} \\Arrays of length 1 are already sorted (trivial).\\\\
+Step \circled{4} \\ Combine after obtaining the results from the child nodes. \EOQ
+\end{enumerate}
+\paragraph{Question 5.} Give the frequency table, Huffman tree, and the resulting table of code words of all characters for the string ``aabaabccdbea''. Note that subtree with more nodes is always placed on the right when joining two subtrees.\hfill {\bf (15 marks)}
+\bigskip
+\vfill
+\begin{center}{\bf END OF PAPER}\end{center}
+\end{document}
