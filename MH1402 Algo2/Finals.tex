@@ -318,7 +318,7 @@ write in Python a \textit{function} to print the element of all nodes of a binar
 \end{itemize}
 Note the input binary tree may or may not be a proper binary tree. \\\text{}\hfill \textbf{(12 marks)}
 \paragraph{Answer}\mbox{}\\\\
-Since the question only requires us to print the nodes in order without any particular formatting, the simple code below satisfies the question.\\
+Since the question only requires us to print the nodes in order without any particular formatting, the code below satisfies the requirements.\\
 \begin{minted}{python}
 def TreeOrder(root):
     A=Queue()                   #Create empty queue A
@@ -454,6 +454,179 @@ Step \circled{3} \\Arrays of length 1 are already sorted (trivial).\\\\
 Step \circled{4} \\ Combine after obtaining the results from the child nodes. \EOQ
 \end{enumerate}
 \paragraph{Question 5.} Give the frequency table, Huffman tree, and the resulting table of code words of all characters for the string ``aabaabccdbea''. Note that subtree with more nodes is always placed on the right when joining two subtrees.\hfill {\bf (15 marks)}
+\paragraph{Answer}\mbox{}\\\\
+Frequency table:
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+a & b & c & d & e \\ \hline
+5 & 3 & 2 & 1 & 1 \\ \hline
+\end{tabular}
+\end{table}
+\noindent When drawn in its node form:
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=2.5cm]
+
+\tikzstyle{ci} = [circle,minimum height=1cm, text centered, draw=black]
+\tikzstyle{sq} = [rectangle,minimum height=1cm, minimum width=1cm, text centered, draw=black]
+\node (afreq) [sq] {5};
+\node (a) [ci, below of=afreq] {a};
+\node (bfreq) [sq, right of=afreq] {3};
+\node (b) [ci, below of=bfreq] {b};
+\node (cfreq) [sq, right of =bfreq] {2};
+\node (c) [ci, below of=cfreq] {c};
+\node (dfreq) [sq, right of =cfreq] {1};
+\node (d) [ci, below of=dfreq] {d};
+\node (efreq) [sq, right of =dfreq] {1};
+\node (e) [ci, below of=efreq] {e}; 
+\draw (afreq)--(a);
+\draw (bfreq)--(b);
+\draw (cfreq)--(c);
+\draw (dfreq)--(d);
+\draw (efreq)--(e);
+\end{tikzpicture}
+\end{figure}
+\noindent
+When computing the Huffman Tree, always combine the nodes of letters (or data) with the two lowest frequencies. In this case, $d$ and $e$ both have the lowest frequency of 1.\\
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=2.5cm]
+
+\tikzstyle{ci} = [circle,minimum height=1cm, text centered, draw=black]
+\tikzstyle{sq} = [rectangle,minimum height=1cm, minimum width=1cm, text centered, draw=black]
+\node (afreq) [sq] {5};
+\node (a) [ci, below of=afreq] {a};
+\node (bfreq) [sq, right of=afreq] {3};
+\node (b) [ci, below of=bfreq] {b};
+\node (cfreq) [sq, right of =bfreq] {2};
+\node (c) [ci, below of=cfreq] {c};
+\node (edfreq) [sq, right of=cfreq,fill=yellow] {2};
+\node (d) [ci, below left of=edfreq, right of=c,xshift=0.7cm,yshift=1.752cm] {d};
+\node (e) [ci, below right of=edfreq, right of=d,xshift=-2cm,yshift=1.752cm] {e}; 
+\draw (afreq)--(a);
+\draw (bfreq)--(b);
+\draw (cfreq)--(c);
+\draw (edfreq)--(d);
+\draw (edfreq)--(e);
+\end{tikzpicture}
+\end{figure}
+\noindent Now, $c$ \& ($d$ \& $e$) have the lowest frequencies. Therefore, we will combine these two branches.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=2cm]
+
+\tikzstyle{ci} = [circle,minimum height=1cm, text centered, draw=black]
+\tikzstyle{sq} = [rectangle,minimum height=1cm, minimum width=1cm, text centered, draw=black]
+\node (afreq) [sq] {5};
+\node (a) [ci, below of=afreq] {a};
+\node (bfreq) [sq, right of=afreq] {3};
+\node (b) [ci, below of=bfreq] {b};
+\node (cfreq) [sq, right of =bfreq,fill=yellow] {4};
+\node (c) [ci, below left of=cfreq,xshift=0.7cm,yshift=-0.6cm] {c};
+\node (edfreq) [sq, below right of=cfreq,xshift=-0.7cm, yshift=-0.6cm] {2};
+\node (d) [ci, below left of=edfreq,xshift=0.7cm] {d};
+\node (e) [ci, below right of=edfreq,xshift=-0.7cm] {e}; 
+\draw (afreq)--(a);
+\draw (bfreq)--(b);
+\draw (cfreq)--(c);
+\draw (edfreq)--(d);
+\draw (edfreq)--(e);
+\draw (edfreq)--(cfreq);
+\end{tikzpicture}
+\end{figure}
+\noindent Again, $b$ \& ($c$ \& ($d$ \& $e$)) have the lowest frequencies. Note that b has 3 nodes while ($c$ \& ($d$ \& $e$)) has 4 nodes. As such, b is on the left subtree.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=2cm]
+
+\tikzstyle{ci} = [circle,minimum height=1cm, text centered, draw=black]
+\tikzstyle{sq} = [rectangle,minimum height=1cm, minimum width=1cm, text centered, draw=black]
+\node (afreq) [sq] {5};
+\node (a) [ci, below of=afreq] {a};
+\node (bfreq) [sq, right of=afreq,fill=yellow] {7};
+\node (b) [ci, below left of=bfreq,yshift=-0.6cm,xshift=0.7cm] {b};
+\node (cfreq) [sq, below right of =bfreq,yshift=-0.6cm,xshift=-0.7cm] {4};
+\node (c) [ci, below left of=cfreq,xshift=0.7cm] {c};
+\node (edfreq) [sq, below right of=cfreq,xshift=-0.7cm] {2};
+\node (d) [ci, below left of=edfreq,xshift=0.7cm] {d};
+\node (e) [ci, below right of=edfreq,xshift=-0.7cm] {e}; 
+\draw (afreq)--(a);
+\draw (bfreq)--(b);
+\draw (cfreq)--(c);
+\draw (edfreq)--(d);
+\draw (edfreq)--(e);
+\draw (edfreq)--(cfreq);
+\draw (bfreq) -- (cfreq);
+\end{tikzpicture}
+\end{figure}
+\noindent
+Finally, $a$ \& ($b$ \& ($c$ \& ($d$ \& $e$))) are the last two roots of their respective subtrees. Both subtrees can be merged together, with $a$ on the left subtree.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=2cm]
+
+\tikzstyle{ci} = [circle,minimum height=1cm, text centered, draw=black]
+\tikzstyle{sq} = [rectangle,minimum height=1cm, minimum width=1cm, text centered, draw=black]
+\node (afreq) [sq,fill=yellow] {12};
+\node (a) [ci, below left of=afreq, xshift=0.7cm] {a};
+\node (bfreq) [sq, below right of=afreq,xshift=-0.7cm] {7};
+\node (b) [ci, below left of=bfreq,xshift=0.7cm] {b};
+\node (cfreq) [sq, below right of =bfreq,xshift=-0.7cm] {4};
+\node (c) [ci, below left of=cfreq,xshift=0.7cm] {c};
+\node (edfreq) [sq, below right of=cfreq,xshift=-0.7cm] {2};
+\node (d) [ci, below left of=edfreq,xshift=0.7cm] {d};
+\node (e) [ci, below right of=edfreq,xshift=-0.7cm] {e}; 
+\draw (afreq)--(a);
+\draw (bfreq)--(b);
+\draw (cfreq)--(c);
+\draw (edfreq)--(d);
+\draw (edfreq)--(e);
+\draw (edfreq)--(cfreq);
+\draw (bfreq) -- (cfreq);
+\draw (bfreq) -- (afreq);
+\end{tikzpicture}
+\end{figure}
+\noindent To determine the table of codewords, you must refer to the Huffman Tree. The codeword for each left edge is `0', while the right edge is `1'. For example, to get to the letter `$c$', you must go down the edges in this order: right $\rightarrow$ right $\rightarrow$ left. Therefore, the codeword for $c \rightarrowtail 110$. Repeat for all characters and you will get the following codeword table.
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+a & b & c & d & e \\ \hline
+0 & 10 & 110 & 1110 & 1111 \\ \hline
+\end{tabular}
+\end{table}
+\EOQ
+\paragraph{Question 6.} What is the maximal set from the following set of points? Show your steps using a binary tree, that arises from the method of divide-and-conquer.
+\begin{equation*}
+\{(5,9),(2,3),(9,2),(1,4),(7,3),(4,5),(3,8)\}
+\end{equation*}
+\hfill {\bf (12 marks)}
+\newpage
+\paragraph{Answer}\mbox{}\\\\Assume that the left subset will have $\lfloor n/2 \rfloor$ points. 
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=2.5cm]
+\tikzstyle{rr} = [rectangle, rounded corners=3pt, minimum width=1cm, minimum height=1cm, text centered, draw=black]
+\node (Top)[rr]{\{(5,9),(2,3),(9,2),(1,4),(7,3),(4,5),(3,8)\}};
+\node (L) [rr,below left of=Top, xshift=-1.5cm]{\{(5,9),(2,3),(9,2)\}};
+\node (R) [rr,below right of=Top, xshift=2cm]{\{(1,4),(7,3),(4,5),(3,8)\}};
+\node (LL) [rr,below left of=L] {\{(5,9)\}};
+\node (LR) [rr, below right of =L] {\{(2,3),(9,2))\}};
+\node (LRL) [rr, below left of =LR] {\{(2,3)\}};
+\node (LRR) [rr, below right of =LR] {\{(9,2)\}};
+\draw (Top) -- (L);
+\draw (Top) -- (R);
+\draw (L) -- (LL);
+\draw (L) -- (LR);
+\draw (LR) -- (LRL);
+\draw (LR) -- (LRR);
+\end{tikzpicture}
+\end{figure}
+
 \bigskip
 \vfill
 \begin{center}{\bf END OF PAPER}\end{center}
