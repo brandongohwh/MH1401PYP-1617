@@ -300,6 +300,7 @@ Note: You are \textbf{NOT} required to know the result from the double summation
 					\label{fig:BSTF}
 				\end{figure}\EOQ
 \end{enumerate}
+\newpage
 \paragraph{Question 3.} Given the node class implementation below:
 \begin{minted}[frame=single, framesep=5pt]{python}
 class Node:
@@ -449,7 +450,7 @@ Second Binary Tree for Sorting
 \end{figure}
 \noindent
 Step \circled{1} \\Identify pivot\\\\
-Step \circled{2} \\Split the values into the left and right subtrees respectively depending on whether the values are \\less than ($<$) or greater than ($>$) the pivot (while preserving the order).\\\\
+Step \circled{2} \\Split the values into the left and right subtrees respectively depending on whether the values are less than ($<$) or greater than ($>$) the pivot (while preserving the order).\\\\
 Step \circled{3} \\Arrays of length 1 are already sorted (trivial).\\\\
 Step \circled{4} \\ Combine after obtaining the results from the child nodes. \EOQ
 \end{enumerate}
@@ -606,27 +607,283 @@ a & b & c & d & e \\ \hline
 \end{equation*}
 \hfill {\bf (12 marks)}
 \newpage
-\paragraph{Answer}\mbox{}\\\\Assume that the left subset will have $\lfloor n/2 \rfloor$ points. 
+\paragraph{Answer}\mbox{}\\\\Assume that the left subset will have $\lfloor n/2 \rfloor$ points. Using the first values as a pivot, (4,5) will act as the median when the list has been sorted.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[node distance=2.5cm]
 \tikzstyle{rr} = [rectangle, rounded corners=3pt, minimum width=1cm, minimum height=1cm, text centered, draw=black]
-\node (Top)[rr]{\{(5,9),(2,3),(9,2),(1,4),(7,3),(4,5),(3,8)\}};
-\node (L) [rr,below left of=Top, xshift=-1.5cm]{\{(5,9),(2,3),(9,2)\}};
-\node (R) [rr,below right of=Top, xshift=2cm]{\{(1,4),(7,3),(4,5),(3,8)\}};
-\node (LL) [rr,below left of=L] {\{(5,9)\}};
-\node (LR) [rr, below right of =L] {\{(2,3),(9,2))\}};
-\node (LRL) [rr, below left of =LR] {\{(2,3)\}};
-\node (LRR) [rr, below right of =LR] {\{(9,2)\}};
+\node (Top)[rr]{\{(5,9),(2,3),(9,2),(1,4),(7,3),(4,5),(3,8)\}$\rightarrow$\{(5,9),(7,3),(9,2)\}};
+\node (L) [rr,below left of=Top, xshift=-2cm]{\{(1,4),(2,3),(3,8)\}$\rightarrow$\{(3,8)\}};
+\node (R) [rr,below right of=Top, xshift=2.5cm]{\{(4,5),(5,9),(7,3),(9,2)\}$\rightarrow$\{(5,9),(7,3),(9,2)\}};
+\node (LL) [rr,below left of=L] {\{(1,4)\}};
+\node (LR) [rr, below right of =L] {\{(2,3),(3,8))\}$\rightarrow$\{(3,8)\}};
+\node (LRL) [rr, below left of =LR, xshift=0.9cm] {\{(2,3)\}};
+\node (LRR) [rr, below right of =LR,xshift=-0.9cm] {\{(3,8)\}};
+\node (RL) [rr, below left of=R] {\{(4,5),(5,9)\}$\rightarrow$\{(5,9)\}};
+\node (RR) [rr, below right of=R] {\{(7,3),(9,2)\}};
+\node (RLL) [rr, below left of=RL,xshift=0.9cm] {\{(4,5)\}};
+\node (RLR) [rr, below right of=RL,xshift=-0.9cm] {\{(5,9)\}};
+\node (RRL) [rr, below left of=RR,xshift=0.9cm] {\{(7,3)\}};
+\node (RRR) [rr, below right of =RR,xshift=-0.9cm] {\{(9,2)\}};
 \draw (Top) -- (L);
 \draw (Top) -- (R);
 \draw (L) -- (LL);
 \draw (L) -- (LR);
 \draw (LR) -- (LRL);
 \draw (LR) -- (LRR);
+\draw (R) -- (RR);
+\draw (R) -- (RL);
+\draw (RLL) --(RL);
+\draw (RLR) --(RL);
+\draw (RRL) -- (RR);
+\draw (RRR) -- (RR);
+
+\end{tikzpicture}
+\end{figure}\mbox{}\\
+\noindent
+Nodes with one element are not changed (trivial).\\
+
+\noindent
+Step \circled{1} \\Sort and identify median\\\\
+Step \circled{2} \\Split the values into the left and right subtrees respectively depending on whether the $1^{st}$ values are less than ($<$) or greater than ($>$) the median.\\\\
+Step \circled{3} \\Arrays of length 1 are already sorted (trivial).\\\\
+Step \circled{4} \\ Combine after you have obtained all leaf nodes, removing all values where $(x_i,y_i)<(x_j,y_j)$ where $i<j$.\\\\Therefore, the maximal set is determined to be the following: \{(5,9),(7,3),(9,2)\}\\\mbox{}\EOQ
+\newpage
+\paragraph{Question 7.} Let $A,B,C,D$ be matrices with the following dimensions:
+\begin{equation*}
+A:2\times 2\quad B:2\times 1\quad C:1\times 8\quad D:8\times 8 
+\end{equation*}
+What is the minimum number of item-wise multiplications required to compute the product $A\ast B\ast C\ast D$? Provide a parenthesization that achieves this minimum.\hfill {\bf (12 marks)}
+\paragraph{Answer}\mbox{}\\\\When performing the \textit{Matrix Chain Algorithm}, we must identify the number of matrices that need to undergo multiplication. In this case, we have 4 matrices. As such, we have \{$d_0,\cdots,d_4$\}. $d_i$ represents the dimension of the respective matrix.
+\begin{equation*}
+\therefore d_0=2\quad d_1=2\quad d_2=1\quad d_3=8\quad d_4=8
+\end{equation*} Furthermore, a 4$\times$4 matrix $N$ is created to illustrate the operations that need to be performed.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=0.8cm]
+\tikzstyle {sq1}=[rectangle, minimum width=0.8cm, minimum height=0.8cm,draw=black]
+\tikzstyle {sqc}=[sq1, fill=yellow!80]
+\tikzstyle {txtonly}=[rectangle,minimum width=1cm, minimum height=0.8cm]
+\node (00) [sq1] {};
+\node (01) [sq1, right of=00] {};
+\node (02) [sq1,right of=01] {};
+\node (03) [sq1,right of=02] {};
+\node (10) [sq1,below of=00] {};
+\node (11) [sq1,right of=10] {};
+\node (12) [sq1,right of=11] {};
+\node (13) [sq1,right of=12] {};
+\node (20) [sq1,below of=10] {};
+\node (21) [sq1,right of=20] {};
+\node (22) [sq1,right of=21] {};
+\node (23) [sq1,right of=22] {};
+\node (30) [sq1,below of=20] {};
+\node (31) [sq1,right of=30] {};
+\node (32) [sq1,right of=31] {};
+\node (33) [sq1,right of=32] {};
+\node (letter) [below left of=10,above left of=20,xshift=-0.5cm, yshift=0.4cm] {$N:$};
 \end{tikzpicture}
 \end{figure}
+\noindent
+The order of obtaining the values involves calculation of the \textbf{\underline{diagonals}} first and moving towards the \textbf{\underline{right}}. i.e. Obtaining values for the matrix must strictly follow this order.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=0.8cm]
+\tikzstyle {sq1}=[rectangle, minimum width=0.8cm, minimum height=0.8cm,draw=black]
+\tikzstyle {sqc}=[sq1, fill=yellow!80]
+\tikzstyle {sqg}=[sq1,fill=gray!10]
+\tikzstyle {txtonly}=[rectangle,minimum width=1cm, minimum height=0.8cm]
+\tikzstyle{emptynode}=[rectangle,minimum width=0.8cm, minimum height=0.8cm]
+\node (00) [sq1] {};
+\node (01) [sq1, right of=00] {};
+\node (02) [sq1,right of=01] {};
+\node (03) [sq1,right of=02] {};
+\node (10) [sqg,below of=00] {--};
+\node (11) [sq1,right of=10] {};
+\node (12) [sq1,right of=11] {};
+\node (13) [sq1,right of=12] {};
+\node (20) [sqg,below of=10] {--};
+\node (21) [sqg,right of=20] {--};
+\node (22) [sq1,right of=21] {};
+\node (23) [sq1,right of=22] {};
+\node (30) [sqg,below of=20] {--};
+\node (31) [sqg,right of=30] {--};
+\node (32) [sqg,right of=31] {--};
+\node (33) [sq1,right of=32] {};
+\node (letter) [below left of=10,above left of=20,xshift=-0.5cm, yshift=0.4cm] {$N:$};
 
+
+\node (fill1) [emptynode,above of=00,xshift=-0.5cm,yshift=0.5cm]{2};
+\node (fill0) [emptynode,left of=fill1]{1};
+\node (fill2) [emptynode,right of=fill1]{3};
+\node (fill3) [emptynode, right of=fill2]{4};
+
+\node (fill4) [emptynode,right of=13,xshift=0.5cm,yshift=-0.5cm]{};
+\node (fill5) [emptynode,below of=fill4]{};
+\node (fill6) [emptynode,below of=fill5]{};
+\node (fill7) [emptynode, below of=fill6]{};
+\draw[->] (fill0) -- (fill7);
+\draw[->] (fill1) -- (fill6);
+\draw[->] (fill2) -- (fill5);
+\draw[->] (fill3) -- (fill4);
+\end{tikzpicture}
+\end{figure}
+\noindent The first part of the algorithm requires that the first diagonal be set to 0. i.e. All $N_{i,i}=0 \text{ for } 0\leq i< (\text{Number of matrices})$.\\\\
+\begin{minipage}{0.45\textwidth}
+\begin{equation*}
+\begin{split}
+N_{0,0}=0\\
+N_{1,1}=0\\
+N_{2,2}=0\\
+N_{3,3}=0
+\end{split}
+\end{equation*}
+\end{minipage}%
+\hfill
+\begin{minipage}{0.45\textwidth}\vspace*{0.36cm}
+\begin{tikzpicture}[node distance=0.8cm]
+\tikzstyle {sq1}=[rectangle, minimum width=0.8cm, minimum height=0.8cm,draw=black]
+\tikzstyle {sqc}=[sq1, fill=yellow!80]
+\tikzstyle {sqg}=[sq1,fill=gray!10]
+\tikzstyle {txtonly}=[rectangle,minimum width=1cm, minimum height=0.8cm]
+\tikzstyle{emptynode}=[rectangle,minimum width=0.8cm, minimum height=0.8cm]
+\node (00) [sqc] {0};
+\node (01) [sq1, right of=00] {};
+\node (02) [sq1,right of=01] {};
+\node (03) [sq1,right of=02] {};
+\node (10) [sqg,below of=00] {--};
+\node (11) [sqc,right of=10] {0};
+\node (12) [sq1,right of=11] {};
+\node (13) [sq1,right of=12] {};
+\node (20) [sqg,below of=10] {--};
+\node (21) [sqg,right of=20] {--};
+\node (22) [sqc,right of=21] {0};
+\node (23) [sq1,right of=22] {};
+\node (30) [sqg,below of=20] {--};
+\node (31) [sqg,right of=30] {--};
+\node (32) [sqg,right of=31] {--};
+\node (33) [sqc,right of=32] {0};
+\end{tikzpicture}
+
+\end{minipage}
+\\\\\\
+Calculating all other matrix index values requires the use of the formula:
+\begin{equation*}
+N_{i,j}=\min_{i\leq k<j} \{N_{i,k}+N_{k+1,j}+d_i d_{k+1} d_{j+1}\}
+\end{equation*}
+Following the numbered diagonals, the remaining indexes are worked out in order.\\\\(Second diagonal)
+\begin{equation*}
+\begin{split}
+N_{0,1}\Rightarrow i=0, j=1 \Rightarrow k=0 &\Rightarrow \min_{0\leq k<1}\{N_{0,0}+N_{1,1}+d_0d_1d_2\}\\
+&=\min_{0\leq k<1}\{0+0+4\}\\
+&=4\\
+N_{1,2}\Rightarrow i=1, j=2 \Rightarrow k=1 &\Rightarrow \min_{1\leq k<2}\{N_{1,1}+N_{2,2}+d_1d_2d_3\}\\
+&=\min_{1\leq k<2}\{0+0+16\}\\
+&=16\\
+N_{2,3}\Rightarrow i=2, j=3 \Rightarrow k=2 &\Rightarrow \min_{2\leq k<3}\{N_{2,2}+N_{3,3}+d_2d_3d_4\}\\
+&=\min_{2\leq k<3}\{0+0+64\}\\
+&=64\\
+\end{split}
+\end{equation*}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=0.8cm]
+\tikzstyle {sq1}=[rectangle, minimum width=0.8cm, minimum height=0.8cm,draw=black]
+\tikzstyle {sqc}=[sq1, fill=yellow!80]
+\tikzstyle {sqg}=[sq1,fill=gray!10]
+\tikzstyle {txtonly}=[rectangle,minimum width=1cm, minimum height=0.8cm]
+\tikzstyle{emptynode}=[rectangle,minimum width=0.8cm, minimum height=0.8cm]
+\node (00) [sq1] {0};
+\node (01) [sqc, right of=00] {4};
+\node (02) [sq1,right of=01] {};
+\node (03) [sq1,right of=02] {};
+\node (10) [sqg,below of=00] {--};
+\node (11) [sq1,right of=10] {0};
+\node (12) [sqc,right of=11] {16};
+\node (13) [sq1,right of=12] {};
+\node (20) [sqg,below of=10] {--};
+\node (21) [sqg,right of=20] {--};
+\node (22) [sq1,right of=21] {0};
+\node (23) [sqc,right of=22] {64};
+\node (30) [sqg,below of=20] {--};
+\node (31) [sqg,right of=30] {--};
+\node (32) [sqg,right of=31] {--};
+\node (33) [sq1,right of=32] {0};
+\end{tikzpicture}
+\end{figure}
+\noindent (Third diagonal)
+\begin{equation*}
+\begin{split}
+N_{0,2}\Rightarrow i=0, j=2 \Rightarrow k=\{0,1\} &\Rightarrow \min_{0\leq k<2}\{N_{0,0}+N_{1,2}+d_0d_1d_3,N_{0,1}+N_{2,2}+d_0d_2d_3\}\\
+&=\min_{0\leq k<2}\{0+16+32,4+0+16\}\\
+&=20\\
+N_{1,3}\Rightarrow i=1, j=2 \Rightarrow k=\{1,2\} &\Rightarrow \min_{1\leq k<3}\{N_{1,1}+N_{2,3}+d_1d_2d_4,N_{1,2}+N_{3,3}+d_1d_3d_4\}\\
+&=\min_{1\leq k<3}\{0+64+16,16+0+128\}\\
+&=80\\
+\end{split}
+\end{equation*}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=0.8cm]
+\tikzstyle {sq1}=[rectangle, minimum width=0.8cm, minimum height=0.8cm,draw=black]
+\tikzstyle {sqc}=[sq1, fill=yellow!80]
+\tikzstyle {sqg}=[sq1,fill=gray!10]
+\tikzstyle {txtonly}=[rectangle,minimum width=1cm, minimum height=0.8cm]
+\tikzstyle{emptynode}=[rectangle,minimum width=0.8cm, minimum height=0.8cm]
+\node (00) [sq1] {0};
+\node (01) [sq1, right of=00] {4};
+\node (02) [sqc,right of=01] {20};
+\node (03) [sq1,right of=02] {};
+\node (10) [sqg,below of=00] {--};
+\node (11) [sq1,right of=10] {0};
+\node (12) [sq1,right of=11] {16};
+\node (13) [sqc,right of=12] {80};
+\node (20) [sqg,below of=10] {--};
+\node (21) [sqg,right of=20] {--};
+\node (22) [sq1,right of=21] {0};
+\node (23) [sq1,right of=22] {64};
+\node (30) [sqg,below of=20] {--};
+\node (31) [sqg,right of=30] {--};
+\node (32) [sqg,right of=31] {--};
+\node (33) [sq1,right of=32] {0};
+\end{tikzpicture}
+\end{figure}
+\noindent (Last diagonal)
+\begin{equation*}
+\begin{split}
+N_{0,3}&\Rightarrow i=0, j=3 \Rightarrow k=\{0,1,2\} \\&\Rightarrow \min_{0\leq k<3}\{N_{0,0}+N_{1,3}+d_0d_1d_4,N_{0,1}+N_{2,3}+d_0d_2d_4,N_{0,2}+N_{3,3}+d_0d_3d_4\}\\
+&=\min_{0\leq k<3}\{0+80+32,4+64+16,20+0+128\}\\
+&=84
+\end{split}
+\end{equation*}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=0.8cm]
+\tikzstyle {sq1}=[rectangle, minimum width=0.8cm, minimum height=0.8cm,draw=black]
+\tikzstyle {sqc}=[sq1, fill=yellow!80]
+\tikzstyle {sqg}=[sq1,fill=gray!10]
+\tikzstyle {txtonly}=[rectangle,minimum width=1cm, minimum height=0.8cm]
+\tikzstyle{emptynode}=[rectangle,minimum width=0.8cm, minimum height=0.8cm]
+\node (00) [sq1] {0};
+\node (01) [sq1, right of=00] {4};
+\node (02) [sq1,right of=01] {20};
+\node (03) [sq1,right of=02,fill=blue!10] {84};
+\node (10) [sqg,below of=00] {--};
+\node (11) [sq1,right of=10] {0};
+\node (12) [sq1,right of=11] {16};
+\node (13) [sq1,right of=12] {80};
+\node (20) [sqg,below of=10] {--};
+\node (21) [sqg,right of=20] {--};
+\node (22) [sq1,right of=21] {0};
+\node (23) [sq1,right of=22] {64};
+\node (30) [sqg,below of=20] {--};
+\node (31) [sqg,right of=30] {--};
+\node (32) [sqg,right of=31] {--};
+\node (33) [sq1,right of=32] {0};
+\end{tikzpicture}
+\end{figure}
+\noindent From $N_{0,3}$, we are able to tell that the minimum number of item-wise multiplications required is 84.\\\\To determine the parenthesization for the least number of item-wise multiplications, we need to work backwards.
+$N_{0,3}$ is obtained from $N_{0,1}+N_{2,3}+d_0d_2d_4$, implying that matrices 0 to 1 are enclosed within a single bracket. i.e. $(A\ast B)\ast C \ast D$. No further analysis of paranthesization of $C$ and $D$ are required since there are only two matrices. Similarly, we also see that matrices 2 to 3 are enclosed within a single bracket. i.e. $(A\ast B)\ast (C \ast D)$.\\\\Note that when looking at the term $N_{i,j}$, it means that matrices $i$ to $j$ inclusive are enclosed within 1 bracket and should be checked to determine whether further paranthesization is required.\\\\
+The answer for this question is 84 item-wise multiplications required and the respective paranthesization that gives the solution is this: $(A\ast B)\ast (C \ast D)$\\\mbox{}\EOQ
 \bigskip
 \vfill
 \begin{center}{\bf END OF PAPER}\end{center}
