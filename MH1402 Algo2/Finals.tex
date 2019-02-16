@@ -154,12 +154,12 @@ Using the inner loops, we determine that the number of executions can be simplif
 \end{equation*}
 Now consider the outer loop, the number of executions of the inner loop is based on the value of $n$. Furthermore, $i$ depends on $n$. The formula for the total number of executions can be written in the following form.
 \begin{equation*}
-\sum_{j=1}^{n}\sum_{x=1}^{j^2-1}x
+\sum_{j=2}^{n}\sum_{x=1}^{j^2-1}x
 \end{equation*}
 Solving the double summation yields the following the result.
 \begin{equation*}
 \begin{split}
-\sum_{j=1}^{n}\sum_{x=1}^{j^2-1}x&=\sum_{j=1}^{n}\frac{(j^2-1)(j^2)}{2}\\&=\frac{1}{20}(n-1)(n)(n+1)(n+2)(2n+1)\\
+\sum_{j=2}^{n}\sum_{x=1}^{j^2-1}x&=\sum_{j=1}^{n}\frac{(j^2-1)(j^2)}{2}\\&=\frac{1}{20}(n-1)(n)(n+1)(n+2)(2n+1)\\
 &=O(n^5)
 \end{split}
 \end{equation*}
@@ -614,7 +614,7 @@ a & b & c & d & e \\ \hline
 \tikzstyle{rr} = [rectangle, rounded corners=3pt, minimum width=1cm, minimum height=1cm, text centered, draw=black]
 \node (Top)[rr]{\{(5,9),(2,3),(9,2),(1,4),(7,3),(4,5),(3,8)\}$\rightarrow$\{(5,9),(7,3),(9,2)\}};
 \node (L) [rr,below left of=Top, xshift=-2cm]{\{(1,4),(2,3),(3,8)\}$\rightarrow$\{(3,8)\}};
-\node (R) [rr,below right of=Top, xshift=2.5cm]{\{(4,5),(5,9),(7,3),(9,2)\}$\rightarrow$\{(5,9),(7,3),(9,2)\}};
+\node (R) [rr,below right of=Top, xshift=2.5cm,]{\{(4,5),(5,9),(7,3),(9,2)\}$\rightarrow$\{(5,9),(7,3),(9,2)\}};
 \node (LL) [rr,below left of=L] {\{(1,4)\}};
 \node (LR) [rr, below right of =L] {\{(2,3),(3,8))\}$\rightarrow$\{(3,8)\}};
 \node (LRL) [rr, below left of =LR, xshift=0.9cm] {\{(2,3)\}};
@@ -641,20 +641,17 @@ a & b & c & d & e \\ \hline
 \end{tikzpicture}
 \end{figure}\mbox{}\\
 \noindent
-Nodes with one element are not changed (trivial).\\
-
-\noindent
 Step \circled{1} \\Sort and identify median\\\\
 Step \circled{2} \\Split the values into the left and right subtrees respectively depending on whether the $1^{st}$ values are less than ($<$) or greater than ($>$) the median.\\\\
-Step \circled{3} \\Arrays of length 1 are already sorted (trivial).\\\\
-Step \circled{4} \\ Combine after you have obtained all leaf nodes, removing all values where $(x_i,y_i)<(x_j,y_j)$ where $i<j$.\\\\Therefore, the maximal set is determined to be the following: \{(5,9),(7,3),(9,2)\}\\\mbox{}\EOQ
+Step \circled{3} \\No operations are required on sets of length 1 (trivial).\\\\
+Step \circled{4} \\ Combine after you have obtained all leaf nodes, removing all $(x_i,y_i)$ where $(x_i,y_i)<(x_j,y_j)$, $i<j$.\\\\Therefore, the maximal set is determined to be the following: \{(5,9),(7,3),(9,2)\}\\\mbox{}\EOQ
 \newpage
 \paragraph{Question 7.} Let $A,B,C,D$ be matrices with the following dimensions:
 \begin{equation*}
 A:2\times 2\quad B:2\times 1\quad C:1\times 8\quad D:8\times 8 
 \end{equation*}
 What is the minimum number of item-wise multiplications required to compute the product $A\ast B\ast C\ast D$? Provide a parenthesization that achieves this minimum.\hfill {\bf (12 marks)}
-\paragraph{Answer}\mbox{}\\\\When performing the \textit{Matrix Chain Algorithm}, we must identify the number of matrices that need to undergo multiplication. In this case, we have 4 matrices. As such, we have \{$d_0,\cdots,d_4$\}. $d_i$ represents the dimension of the respective matrix.
+\paragraph{Answer}\mbox{}\\\\When performing the \textit{Matrix Chain Algorithm}, we must identify the number of matrices that need to undergo multiplication. In this case, we have 4 matrices. As such, we have \{$d_0,\cdots,d_4$\}. $d_i$ represents the the number of rows/columns of the respective matrix.
 \begin{equation*}
 \therefore d_0=2\quad d_1=2\quad d_2=1\quad d_3=8\quad d_4=8
 \end{equation*} Furthermore, a 4$\times$4 matrix $N$ is created to illustrate the operations that need to be performed.
@@ -684,7 +681,7 @@ What is the minimum number of item-wise multiplications required to compute the 
 \end{tikzpicture}
 \end{figure}
 \noindent
-The order of obtaining the values involves calculation of the \textbf{\underline{diagonals}} first and moving towards the \textbf{\underline{right}}. i.e. Obtaining values for the matrix must strictly follow this order.
+The order of obtaining the values involves using of \textbf{\underline{diagonals}} as the guides. Tha main diagonal must be calculated first and moves subsequently towards the \textbf{\underline{right}} when completed. i.e. Obtaining values for the matrix must strictly follow this order.
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[node distance=0.8cm]
@@ -773,15 +770,15 @@ N_{i,j}=\min_{i\leq k<j} \{N_{i,k}+N_{k+1,j}+d_i d_{k+1} d_{j+1}\}
 Following the numbered diagonals, the remaining indexes are worked out in order.\\\\(Second diagonal)
 \begin{equation*}
 \begin{split}
-N_{0,1}\Rightarrow i=0, j=1 \Rightarrow k=0 &\Rightarrow \min_{0\leq k<1}\{N_{0,0}+N_{1,1}+d_0d_1d_2\}\\
-&=\min_{0\leq k<1}\{0+0+4\}\\
-&=4\\
-N_{1,2}\Rightarrow i=1, j=2 \Rightarrow k=1 &\Rightarrow \min_{1\leq k<2}\{N_{1,1}+N_{2,2}+d_1d_2d_3\}\\
-&=\min_{1\leq k<2}\{0+0+16\}\\
-&=16\\
-N_{2,3}\Rightarrow i=2, j=3 \Rightarrow k=2 &\Rightarrow \min_{2\leq k<3}\{N_{2,2}+N_{3,3}+d_2d_3d_4\}\\
-&=\min_{2\leq k<3}\{0+0+64\}\\
-&=64\\
+N_{0,1}\Rightarrow i=0, j=1 \Rightarrow k=0 \Rightarrow &\min_{0\leq k<1}\{N_{0,0}+N_{1,1}+d_0d_1d_2\}\\
+=&\min_{0\leq k<1}\{0+0+4\}\\
+=&\text{~}4\\
+N_{1,2}\Rightarrow i=1, j=2 \Rightarrow k=1 \Rightarrow &\min_{1\leq k<2}\{N_{1,1}+N_{2,2}+d_1d_2d_3\}\\
+=&\min_{1\leq k<2}\{0+0+16\}\\
+=&\text{~}16\\
+N_{2,3}\Rightarrow i=2, j=3 \Rightarrow k=2 \Rightarrow &\min_{2\leq k<3}\{N_{2,2}+N_{3,3}+d_2d_3d_4\}\\
+=&\min_{2\leq k<3}\{0+0+64\}\\
+=&\text{~}64\\
 \end{split}
 \end{equation*}
 \begin{figure}[H]
@@ -813,12 +810,12 @@ N_{2,3}\Rightarrow i=2, j=3 \Rightarrow k=2 &\Rightarrow \min_{2\leq k<3}\{N_{2,
 \noindent (Third diagonal)
 \begin{equation*}
 \begin{split}
-N_{0,2}\Rightarrow i=0, j=2 \Rightarrow k=\{0,1\} &\Rightarrow \min_{0\leq k<2}\{N_{0,0}+N_{1,2}+d_0d_1d_3,N_{0,1}+N_{2,2}+d_0d_2d_3\}\\
-&=\min_{0\leq k<2}\{0+16+32,4+0+16\}\\
-&=20\\
-N_{1,3}\Rightarrow i=1, j=2 \Rightarrow k=\{1,2\} &\Rightarrow \min_{1\leq k<3}\{N_{1,1}+N_{2,3}+d_1d_2d_4,N_{1,2}+N_{3,3}+d_1d_3d_4\}\\
-&=\min_{1\leq k<3}\{0+64+16,16+0+128\}\\
-&=80\\
+N_{0,2}\Rightarrow i=0, j=2 \Rightarrow k=\{0,1\} \Rightarrow &\min_{0\leq k<2}\{N_{0,0}+N_{1,2}+d_0d_1d_3,N_{0,1}+N_{2,2}+d_0d_2d_3\}\\
+=&\min_{0\leq k<2}\{0+16+32,4+0+16\}\\
+=&\text{~}20\\
+N_{1,3}\Rightarrow i=1, j=2 \Rightarrow k=\{1,2\} \Rightarrow& \min_{1\leq k<3}\{N_{1,1}+N_{2,3}+d_1d_2d_4,N_{1,2}+N_{3,3}+d_1d_3d_4\}\\
+=&\min_{1\leq k<3}\{0+64+16,16+0+128\}\\
+=&\text{~}80\\
 \end{split}
 \end{equation*}
 \begin{figure}[H]
@@ -850,9 +847,9 @@ N_{1,3}\Rightarrow i=1, j=2 \Rightarrow k=\{1,2\} &\Rightarrow \min_{1\leq k<3}\
 \noindent (Last diagonal)
 \begin{equation*}
 \begin{split}
-N_{0,3}&\Rightarrow i=0, j=3 \Rightarrow k=\{0,1,2\} \\&\Rightarrow \min_{0\leq k<3}\{N_{0,0}+N_{1,3}+d_0d_1d_4,N_{0,1}+N_{2,3}+d_0d_2d_4,N_{0,2}+N_{3,3}+d_0d_3d_4\}\\
-&=\min_{0\leq k<3}\{0+80+32,4+64+16,20+0+128\}\\
-&=84
+N_{0,3}\Rightarrow &\text{~}i=0, j=3 \Rightarrow k=\{0,1,2\} \\\Rightarrow &\min_{0\leq k<3}\{N_{0,0}+N_{1,3}+d_0d_1d_4,N_{0,1}+N_{2,3}+d_0d_2d_4,N_{0,2}+N_{3,3}+d_0d_3d_4\}\\
+=&\min_{0\leq k<3}\{0+80+32,4+64+16,20+0+128\}\\
+=&\text{~}84
 \end{split}
 \end{equation*}
 \begin{figure}[H]
@@ -881,7 +878,7 @@ N_{0,3}&\Rightarrow i=0, j=3 \Rightarrow k=\{0,1,2\} \\&\Rightarrow \min_{0\leq 
 \node (33) [sq1,right of=32] {0};
 \end{tikzpicture}
 \end{figure}
-\noindent From $N_{0,3}$, we are able to tell that the minimum number of item-wise multiplications required is 84.\\\\To determine the parenthesization for the least number of item-wise multiplications, we need to work backwards.
+\noindent From $N_{0,3}$ (most top right box), we are able to tell that the minimum number of item-wise multiplications required is 84.\\\\To determine the parenthesization for the least number of item-wise multiplications, we need to work backwards.
 $N_{0,3}$ is obtained from $N_{0,1}+N_{2,3}+d_0d_2d_4$, implying that matrices 0 to 1 are enclosed within a single bracket. i.e. $(A\ast B)\ast C \ast D$. No further analysis of paranthesization of $C$ and $D$ are required since there are only two matrices. Similarly, we also see that matrices 2 to 3 are enclosed within a single bracket. i.e. $(A\ast B)\ast (C \ast D)$.\\\\Note that when looking at the term $N_{i,j}$, it means that matrices $i$ to $j$ inclusive are enclosed within 1 bracket and should be checked to determine whether further paranthesization is required.\\\\
 The answer for this question is 84 item-wise multiplications required and the respective paranthesization that gives the solution is this: $(A\ast B)\ast (C \ast D)$\\\mbox{}\EOQ
 \bigskip
