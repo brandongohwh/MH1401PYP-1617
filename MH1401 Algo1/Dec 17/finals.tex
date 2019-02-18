@@ -1,0 +1,283 @@
+\documentclass[12pt]{article}
+\usepackage{fancyhdr}
+\usepackage{amsmath,amsfonts,enumerate,amssymb}
+\usepackage{color,graphicx}
+\usepackage{float}
+\pagestyle{fancy}
+\usepackage{soul} %Strikeout
+\usepackage{minted}
+\usepackage{tikzsymbols}
+\usetikzlibrary{arrows}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Do your customization here
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\masunitnumber}{MH1401/CY1401}
+\newcommand{\examdate}{Dec 2017}
+\newcommand{\academicyear}{2017-2018}
+\newcommand{\semester}{I}
+\newcommand{\coursename}{ALGORITHMS \& COMPUTING I}
+\newcommand{\numberofhours}{2}
+
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\EOQ}{\hfill $\square$}
+%\DeclareMathOperator{\diam}{diam}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Don't touch anything from here till instructions
+% to candidates
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{}
+\rhead{}
+\chead{{\bf NANYANG TECHNOLOGICAL UNIVERSITY}}
+\lfoot{}
+\rfoot{}
+\cfoot{}
+\begin{document}
+\setlength{\headsep}{5truemm}
+\setlength{\headheight}{14.5truemm}
+\setlength{\voffset}{-0.45truein}
+\renewcommand{\headrulewidth}{0.0pt}
+\begin{center}
+SEMESTER \semester\ EXAMINATION \academicyear ~SOLUTION
+\end{center}
+\begin{center}
+{\bf \masunitnumber\ -- \coursename}
+\end{center}
+\vspace{20truemm}
+
+\noindent \examdate\hspace{55truemm} TIME ALLOWED: \numberofhours\ HOURS
+
+\vspace{19truemm}
+\hrule
+\vspace{19truemm}
+\noindent\underline{INSTRUCTIONS TO CANDIDATES}
+\vspace{8truemm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Adjust your instructions here
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{enumerate}
+\item This examination paper contains {\bf FOUR (4)} questions and comprises 
+{\bf FIVE (5)} printed pages.
+
+\item Answer {\bf all} questions. 
+The marks for each question are indicated at the beginning of each question.
+
+
+\item Answer each question beginning on a {\bf FRESH} page of the answer book.
+
+\item This {\bf IS NOT} an {\bf OPEN BOOK} exam.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% leave this as it is
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\lhead{}
+\rhead{\masunitnumber}
+\chead{}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+\setlength{\footskip}{45pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% put your exam questions here
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iffalse
+\noindent Solutions provided by:
+Brandon Goh -- bgoh008@e.ntu.edu.sg
+\fi
+\paragraph{Question 1.}\hfill {\bf (30 marks)}
+\begin{enumerate}[(a)]
+\item Assume that you are given a variable $x$ that refers to an object of type float. Write a selection statement that prints an error message if $x$ is not a positive integer.
+\item What is the result of the following logical expression?
+\begin{verbatim}
+5 > 6 or 8 > 4 and True
+\end{verbatim}
+\item What is printed on the screen when you execute the following commands?
+\begin{verbatim}
+Sa = 'abcdefghij'
+Sb = Sa[:4]*2 + Sa[6:]*2 + Sa[5]
+print(Sb)
+\end{verbatim}
+\item What is the average asymptotic complexity of these two algorithms, relative to $n$? Which one is asymptotically faster?\\\\
+\begin{minipage}[t]{0.45\textwidth}
+Algorithm 1:
+\begin{verbatim}
+my_value = 1
+for i in range(n):
+    for j in range(n):
+        my_value += j
+    my_value *= 2
+\end{verbatim}
+\end{minipage}
+\begin{minipage}[t]{0.45\textwidth}
+Algorithm 2:
+\begin{verbatim}
+my_value = 1
+for i in range(n):
+    my_value *= 2
+for j in range(n):
+    my_value += j
+\end{verbatim}
+\end{minipage}
+\item Consider the following piece of code:
+\begin{verbatim}
+for i in range(n):
+    for j in range(i,n):
+        print('*'',end='')
+    print('\n',end='')
+\end{verbatim}
+Write what is printed on the screen when we execute these lines, assuming that $n=4$.
+\item Sort these five operators according the order precedence rule (from highest to lowest priority)
+\begin{verbatim}
+*   ()   **   and   +
+\end{verbatim}
+\end{enumerate}
+\paragraph{Answer}
+\begin{enumerate}[(a)]
+\item \verb|if x<= 0 or int(x)!=x: print('ERROR')|
+\item True
+\item `abcdabcdghijghijf'
+\item The first algorithm has two nested \textit{for} loops, each ranging through $n$ elements. Thus, its asymptotic complexity is $O(n^2)$. The second algorithm has two independent \textit{for} loops, each ranging through $n$ elements. Thus, its asymptotic complexity is $O(n)$.
+\item \begin{verbatim}
+****
+***
+**
+*
+\end{verbatim}
+\item \begin{verbatim}
+()   **   *   +   and
+\end{verbatim}
+\end{enumerate}\clearpage
+\paragraph{Question 2.} \hfill {\bf (30 marks)}
+\begin{enumerate}[(i)]
+\item We have a function $F(x,y)$ defined as $F(x,y)=y$ for any $y\neq 0$, and as
+\begin{equation*}
+F(x,0)=
+\begin{cases}
+4x^2+x-2 &\text{when }x<-3\\-x &\text{when }x\geq -3 \text{ and } x\leq 2\\\frac{x}{2} &\text{when }x>2
+\end{cases}
+\end{equation*}
+Implement a Python function \texttt{computeF} that takes as input the values $x$ and $y$, and that returns the corresponding value $F(x,y)$.
+\item Assuming that you have access to the function \texttt{computeF} from the previous question, implement a user menu that will keep asking the user to input some value $x$ and that will print every time the result of the function $F(x,0)$ (no need for error checking). The process stops only when the user enters the string ``exit''. Besides, when the user enters the string ``hi'', the script should print on the screen the string ``hello'' (without exiting the program).\\\\Here is a possible execution example of the program:
+\begin{verbatim}
+Please enter a value x: 10
+F(10.000000,0) = 5.000000
+
+Please enter a value x: 1
+F(1.000000,0) = -1.000000
+
+Please enter a value x: hi
+hello
+
+Please enter a value x: exit
+exiting the program ...
+\end{verbatim}
+\end{enumerate}
+\paragraph{Answer}
+\begin{enumerate}[(i)]
+\item \begin{minted}[frame=single, framesep=5pt]{python}
+def computeF(x,y):
+    if y!=0:
+        return y
+    else:
+        if x<-3:
+            return 4*x**5+x-2
+        elif x<=2:
+            return -x
+        else:
+            return x/2
+\end{minted}
+\item \begin{minted}[frame=single, framesep=5pt]{python}
+while True:
+    user_input = input('Please enter a value x: ')
+    if user_input=='hi':
+        print('hello')
+    elif user_input=='exit':
+        print('exiting the program ...')
+        break
+    else:
+        x = float(user_input)
+        print('F(%f,0) = %f' % (x,computeF(x,0)))
+\end{minted}
+\end{enumerate}\clearpage
+\paragraph{Question 3.}\hfill {\bf (10 marks)}
+\\\\The Pascal triangle is a special triangular array named after the French mathematician Blaise Pascal. It can be built with this simple recursive method: in the first row, only the number 1 appears. Then, in order to deduce the elements of the following rows, just add the number above and to the left with the number above and to the right to find the new value. If either the number to the right or left is not present, substitute a zero in its place. For example, here is the triangle for the first 6 rows:\\
+{\par \centering
+1\\1\qquad 1\\1\qquad 2\qquad 1\\1\qquad 3\qquad 3\qquad 1\\1\qquad 4\qquad 6\qquad 4\qquad 1\\1\qquad 5\qquad 10\qquad 10\qquad 5\qquad 1\\}
+\mbox{}\\
+Write a Python recursive function \texttt{pascal} that will take as input an integer $n$ and that will generate a list representing the $n$-th row of the Pascal triangle. For example, \texttt{pascal(5)} should return the list $[1,4,6,4,1]$.
+\paragraph{Answer}
+\begin{minted}[frame=single, framesep=5pt,breaklines]{python}
+def pascal(n):
+    if n == 1:
+        return [1]
+    else:
+        current_line = [1]
+        previous_line = pascal(n-1)
+        for i in range(len(previous_line)-1):
+            current_line.append(previous_line[i] + previous_line[i+1])
+        current_line.append(1)
+    return current_line
+\end{minted}
+\clearpage
+\paragraph{Question 4. }\hfill {\bf (30 marks)}\\\\
+For this question, you can assume that the NumPy module has already been imported using \verb|import numpy as np|. Besides, you are not allowed to use built-in Python or NumPy functions such as \verb|sum| or \verb|np.average|.
+\begin{enumerate}[(i)]
+\item Write a Python function \verb|my_average| that will take as input a matrix \verb|mat| of unknown size, represented as a NumPy two-dimensional array. The function will output the average of the elements of that matrix.
+\item Write a Python function \verb|is_average| that will take as input a matrix \verb|mat| of unknown size, represented as a NumPy two-dimensional array. The function will out the boolean value \textit{True} if any of the matrix elements is equal to the matrix average, \textit{False} otherwise. You can assume that you have access to \verb|my_average|, the function implemented in the previous question.
+\item Write a function \verb|sort_average| that will take as input a matrix \verb|mat| of unknown size, represented as a NumPy two-dimensional array. The function will output a list containing all the elements of the matrix, sorted (in increasing order) according to their distance to the matrix average. For an element $x$ and an average value $a$, the distance is defined as $|x-a|$. You can assume that you have access to \verb|my_average|, the function implemented in the previous question.\\\\For example, with the matrix
+\[\begin{bmatrix}
+ 0\quad 2\quad 0\\2\quad 4\quad 1\\1\quad 5\quad 3\end{bmatrix}\]
+ the matrix average is 2, and the output of the function \verb|sort_average| should be $[2,2,3,1,1,4,0,0,5]$ (some elements could be at a different position as they have the same distance to the average, for example 1's and 3's positions could be permuted).
+\end{enumerate}
+\paragraph{Answer}
+\begin{enumerate}[(i)]
+\item \begin{minted}[frame=single, framesep=5pt,breaklines]{python}
+def my_average(mat):
+    (rows,cols) = mat.shape
+    my_sum = 0
+    for r in range(rows):
+        for c in range(cols):
+            my_sum += mat[r,c]
+    return my_sum/(rows*cols)
+\end{minted}
+\item \begin{minted}[frame=single, framesep=5pt,breaklines]{python}
+def is_average(mat):
+    (rows,cols) = mat.shape
+    mat_average = my_average(mat)
+    for r in range(rows):
+        for c in range(cols):
+            if mat[r,c]==mat_average:
+                return True
+    return False
+\end{minted}
+\item \begin{minted}[frame=single, framesep=5pt,breaklines]{python}
+def sort_average(mat):
+    (rows,cols) = mat.shape
+    mat_average = my_average(mat)
+    
+    my_input_list = []
+    for r in range(rows):
+        for c in range(cols):
+            my_input_list.append(mat[r,c])
+    my_output_list = [my_input_list[0]]
+    for j in range(1,len(my_input_list)):
+        i=0
+        while abs(my_output_list[i]-mat_average) < abs(my_input_list[j]-mat_average):
+            i += 1
+            if i==len(my_output_list):
+                break
+        my_output_list.insert(i,my_input_list[j])
+    return my_output_list
+\end{minted}
+\end{enumerate}
+\bigskip
+\vfill
+\begin{center}{\bf END OF PAPER}\end{center}
+\end{document}

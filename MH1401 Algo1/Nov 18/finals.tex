@@ -1,0 +1,279 @@
+\documentclass[12pt]{article}
+\usepackage{fancyhdr}
+\usepackage{amsmath,amsfonts,enumerate,amssymb}
+\usepackage{color,graphicx}
+\usepackage{float}
+\pagestyle{fancy}
+\usepackage{soul} %Strikeout
+\usepackage{minted}
+\usepackage{tikzsymbols}
+\usetikzlibrary{arrows}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Do your customization here
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\masunitnumber}{MH1401}
+\newcommand{\examdate}{Nov 2018}
+\newcommand{\academicyear}{2018-2019}
+\newcommand{\semester}{I}
+\newcommand{\coursename}{Algorithms and Computing I}
+\newcommand{\numberofhours}{2}
+
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\EOQ}{\hfill $\square$}
+%\DeclareMathOperator{\diam}{diam}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Don't touch anything from here till instructions
+% to candidates
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{}
+\rhead{}
+\chead{{\bf NANYANG TECHNOLOGICAL UNIVERSITY}}
+\lfoot{}
+\rfoot{}
+\cfoot{}
+\begin{document}
+\setlength{\headsep}{5truemm}
+\setlength{\headheight}{14.5truemm}
+\setlength{\voffset}{-0.45truein}
+\renewcommand{\headrulewidth}{0.0pt}
+\begin{center}
+SEMESTER \semester\ EXAMINATION \academicyear ~SUGGESTED SOLUTION
+\end{center}
+\begin{center}
+{\bf \masunitnumber\ -- \coursename}
+\end{center}
+\vspace{20truemm}
+
+\noindent \examdate\hspace{55truemm} TIME ALLOWED: \numberofhours\ HOURS
+
+\vspace{19truemm}
+\hrule
+\vspace{19truemm}
+\noindent\underline{INSTRUCTIONS TO CANDIDATES}
+\vspace{8truemm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Adjust your instructions here
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{enumerate}
+\item This examination paper contains {\bf FOUR (4)} questions and comprises 
+{\bf FIVE (5)} printed pages.
+
+\item Answer {\bf ALL} questions. 
+The marks for each question are indicated at the beginning of each question.
+
+
+\item Answer each question beginning on a {\bf FRESH} page of the answer book.
+
+\item This is a {\bf RESTRICTED OPEN BOOK} exam. Each candidate is allowed to bring {\bf ONE (1)} hand-written, double-sided A4 size help sheet.
+
+\item Candidates may use calculators. However, they should lay out systematically the various steps in the workings.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% leave this as it is
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\lhead{}
+\rhead{\masunitnumber}
+\chead{}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+\setlength{\footskip}{45pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% put your exam questions here
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iffalse
+\noindent Solutions provided by:
+Brandon Goh -- bgoh008@e.ntu.edu.sg
+\fi
+\paragraph{Question 1.}\hfill {\bf (25 marks)}
+\begin{enumerate}[(a)]
+\item What is the value of the following expression?
+\begin{verbatim}
+10+10//2**2+5
+\end{verbatim}
+\item What is printed on the screen when you execute the following commands?
+\begin{enumerate}[(i)]
+\item \begin{verbatim}
+x = 100
+y = 99
+z = x
+x = 'hello'
+y = x
+print(x,y,z)
+\end{verbatim}
+\item \begin{verbatim}
+print(list(range(3,10)))\end{verbatim}
+\item \begin{verbatim}print(list(range(3,10,2)))\end{verbatim}
+\item \begin{verbatim}myList = [10, 20, 'NTU', 'SPMS', 99, 999, 'hi']
+ListA = myList[1:5]
+ListB = myList[-1:-5:-2]
+print(ListA)
+print(ListB)
+print(ListB*3)
+\end{verbatim}
+\item \begin{verbatim}
+L = []
+for i in range(10):
+    for j in range(10):
+        if (i+j)==10 and j>=i:
+            L.append([i,j])
+print(L)
+\end{verbatim}
+\end{enumerate}
+\end{enumerate}
+\paragraph{Answer}
+\begin{enumerate}[(a)]
+\item 10 (\verb|**| has highest order of precedence, followed by \verb|//| and lastly \verb|+|)
+\item \begin{enumerate}[(i)]
+
+\item `hello', `hello', 100
+\item $[3,4,5,6,7,8,9]$
+\item $[3,5,7,9]$
+\item \text{[}20, `NTU', `SPMS', 99\text{]}\\\text{[}`hi', 99\text{]}\\\text{[}`hi', 99, `hi', 99, `hi', 99\text{]}
+\item \text{[}\text{[}1, 9\text{]}, \text{[}2, 8\text{]}, \text{[}3, 7\text{]}, \text{[}4, 6\text{]}, \text{[}5, 5\text{]}\text{]}
+\end{enumerate}
+\end{enumerate}
+\paragraph{Question 2.} \hfill {\bf (25 marks)}
+\begin{enumerate}[(a)]
+\item Consider the following piece of code:
+\begin{verbatim}
+if (age>=12):
+    print('You are eligible to see the match.')
+    if (age <=20 or age >=60):
+        print('Ticket price is $10.')
+    else:
+        print('Ticket price is $15.')
+else:
+    print('You are not eligible.')
+\end{verbatim}
+Rewrite the above program so that it does the same thing without using nested \verb|if-else| statements.
+\item Write a program that does the following:
+\begin{itemize}
+\item First, prompt the user for an input of a positive integer which will be assigned to the variable \verb|my_num|. If a user inputs $0$ or a negative integer, print an error message, and exit the program.
+\item With a valid input, generate a list whose length is equal to \verb|my_num|, where each item in the list is a random integer between 1 (included) and 9 (included).
+\item Then replace every odd integer in the list by 0, and print the resulting list.
+\end{itemize}
+\end{enumerate}
+\paragraph{Answer}
+\begin{enumerate}[(a)]
+\item \begin{minted}[frame=single, framesep=5pt]{python}
+if (age<12):
+    print('You are not eligible.')
+elif (20<age<60):
+    print('You are eligible to see the match.')
+    print('Ticket price is $15.')
+else:
+    print('You are eligible to see the match.')
+    print('Ticket price is $10.')
+\end{minted}
+*Note: There are other solutions to this question.
+\item \begin{minted}[frame=single, framesep=5pt,breaklines]{python}
+import random as rand
+
+my_num = int(input('Input a positive integer: '))
+if my_num<=0: print('You have not entered a positive integer! Exiting ...')
+else:
+    //Either use for loop or list comprehension
+	
+    //1) Using for loop
+    L=[0]*my_num
+    for i in range(my_num):
+        L[i]=rand.randint(1,9)
+    
+    //2) Using list comprehension
+    L=[rand.randint(1,9) for i in range(my_num)]
+    
+    //Replace odd integers
+    for i in range(len(L)):
+        if L[i]%2==1:
+            L[i]=0
+print(L)
+\end{minted}
+\end{enumerate}\clearpage
+\paragraph{Question 3.}\hfill {\bf (10 marks)}
+\\\begin{verbatim}
+n = int(input('Enter an integer: '))
+num = 0
+while (10<=n<=99):
+    if n>50:
+        break
+    num += n
+    n = int(input('Enter an integer: '))
+else:
+    print('ok')
+print(num)
+\end{verbatim}
+When the program is run, what will be displayed in the output if the following numbers are entered in the given order at the prompts:
+\begin{enumerate}[(i)]
+\item 20, 30, 60
+\item 20, 30, 40, 7
+\end{enumerate}
+\paragraph{Answer}
+\begin{enumerate}[(i)]
+\item 50
+\item 90
+\item The number printed on the last line is the sum of the previously entered numbers, excluding the last number (since the previous entered numbers satisfy the \textit{while} condition and \textbf{NOT} the nested \textit{if} condition)
+\end{enumerate}
+\paragraph{Question 4. }\hfill {\bf (30 marks)}\\\\
+For this question, you can assume that the NumPy module has already been imported using \verb|import numpy as np|. Besides, you are not allowed to use built-in Python or NumPy functions such as \verb|sum| or \verb|np.average|.
+\begin{enumerate}[(i)]
+\item Write a Python function \verb|my_average| that will take as input a matrix \verb|mat| of unknown size, represented as a NumPy two-dimensional array. The function will output the average of the elements of that matrix.
+\item Write a Python function \verb|is_average| that will take as input a matrix \verb|mat| of unknown size, represented as a NumPy two-dimensional array. The function will out the boolean value \textit{True} if any of the matrix elements is equal to the matrix average, \textit{False} otherwise. You can assume that you have access to \verb|my_average|, the function implemented in the previous question.
+\item Write a function \verb|sort_average| that will take as input a matrix \verb|mat| of unknown size, represented as a NumPy two-dimensional array. The function will output a list containing all the elements of the matrix, sorted (in increasing order) according to their distance to the matrix average. For an element $x$ and an average value $a$, the distance is defined as $|x-a|$. You can assume that you have access to \verb|my_average|, the function implemented in the previous question.\\\\For example, with the matrix
+\[\begin{bmatrix}
+ 0\quad 2\quad 0\\2\quad 4\quad 1\\1\quad 5\quad 3\end{bmatrix}\]
+ the matrix average is 2, and the output of the function \verb|sort_average| should be $[2,2,3,1,1,4,0,0,5]$ (some elements could be at a different position as they have the same distance to the average, for example 1's and 3's positions could be permuted).
+\end{enumerate}
+\paragraph{Answer}
+\begin{enumerate}[(i)]
+\item \begin{minted}[frame=single, framesep=5pt,breaklines]{python}
+def my_average(mat):
+    (rows,cols) = mat.shape
+    my_sum = 0
+    for r in range(rows):
+        for c in range(cols):
+            my_sum += mat[r,c]
+    return my_sum/(rows*cols)
+\end{minted}
+\item \begin{minted}[frame=single, framesep=5pt,breaklines]{python}
+def is_average(mat):
+    (rows,cols) = mat.shape
+    mat_average = my_average(mat)
+    for r in range(rows):
+        for c in range(cols):
+            if mat[r,c]==mat_average:
+                return True
+    return False
+\end{minted}
+\item \begin{minted}[frame=single, framesep=5pt,breaklines]{python}
+def sort_average(mat):
+    (rows,cols) = mat.shape
+    mat_average = my_average(mat)
+    
+    my_input_list = []
+    for r in range(rows):
+        for c in range(cols):
+            my_input_list.append(mat[r,c])
+    my_output_list = [my_input_list[0]]
+    for j in range(1,len(my_input_list)):
+        i=0
+        while abs(my_output_list[i]-mat_average) < abs(my_input_list[j]-mat_average):
+            i += 1
+            if i==len(my_output_list):
+                break
+        my_output_list.insert(i,my_input_list[j])
+    return my_output_list
+\end{minted}
+\end{enumerate}
+\bigskip
+\vfill
+\begin{center}{\bf END OF PAPER}\end{center}
+\end{document}
