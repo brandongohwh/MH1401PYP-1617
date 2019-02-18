@@ -89,10 +89,9 @@ The marks for each question are indicated at the beginning of each question.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % put your exam questions here
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\iffalse
 \noindent Solutions provided by:
 Brandon Goh -- bgoh008@e.ntu.edu.sg
-\fi
+
 \paragraph{Question 1.}\hfill {\bf (25 marks)}
 \begin{enumerate}[(a)]
 \item What is the value of the following expression?
@@ -215,22 +214,47 @@ When the program is run, what will be displayed in the output if the following n
 \begin{enumerate}[(i)]
 \item 20, 30, 60
 \item 20, 30, 40, 7
+\item In general, describe the number printed on the last line of the output (i.e. how it is related to the numbers entered by the user) when the program terminates.
+\item Modify the program so that it continues to prompt the user for an input of an integer so long as the previous input is a 2-digit number, i.e. it will terminate only when the integer entered is less than 10 or more than 99. Moreover, the number printed on the last line of the output should be the sum of all the \textbf{even} 2-digit integers entered by the user.
 \end{enumerate}
 \paragraph{Answer}
 \begin{enumerate}[(i)]
 \item 50
 \item 90
 \item The number printed on the last line is the sum of the previously entered numbers, excluding the last number (since the previous entered numbers satisfy the \textit{while} condition and \textbf{NOT} the nested \textit{if} condition)
+\item \begin{minted}[frame=single, framesep=5pt,breaklines]{python}
+n = int(input('Enter an integer: '))
+num = 0
+while (10<=n<=99):
+    if n%2==0:
+        num += n
+    n = int(input('Enter an integer: '))
+else:
+    print('ok')
+print(num)
+\end{minted}
 \end{enumerate}
-\paragraph{Question 4. }\hfill {\bf (30 marks)}\\\\
-For this question, you can assume that the NumPy module has already been imported using \verb|import numpy as np|. Besides, you are not allowed to use built-in Python or NumPy functions such as \verb|sum| or \verb|np.average|.
+\paragraph{Question 4. }\hfill {\bf (25 marks)}\\\\
+Assume that the numpy module has already been imported using
+\begin{verbatim}
+import numpy as np
+\end{verbatim}
+\noindent A \textbf{Latin square} is an $n\times n$ array filled with $n$ different integers $x_1,x_2,\cdots,x_n$ such that each of these integers occurs exactly once in each row and exactly once in each column. The $(i,j)$-entry of a Latin square $L$, denoted by $L[i,j]$, is the integer that occurs in the cell at row-index $i$ and column-index $j$, assuming index starts at 0. An example of a $4\times 4$ Latin square $L$ is:
+{\par \centering
+\[
+\begin{pmatrix}
+1&6&3&7\\7&1&6&3\\3&7&1&6\\6&3&7&1
+\end{pmatrix}
+\]
+}
+where $L[0,3]=7$, $L[1,2]=6$ etc.
 \begin{enumerate}[(i)]
-\item Write a Python function \verb|my_average| that will take as input a matrix \verb|mat| of unknown size, represented as a NumPy two-dimensional array. The function will output the average of the elements of that matrix.
-\item Write a Python function \verb|is_average| that will take as input a matrix \verb|mat| of unknown size, represented as a NumPy two-dimensional array. The function will out the boolean value \textit{True} if any of the matrix elements is equal to the matrix average, \textit{False} otherwise. You can assume that you have access to \verb|my_average|, the function implemented in the previous question.
-\item Write a function \verb|sort_average| that will take as input a matrix \verb|mat| of unknown size, represented as a NumPy two-dimensional array. The function will output a list containing all the elements of the matrix, sorted (in increasing order) according to their distance to the matrix average. For an element $x$ and an average value $a$, the distance is defined as $|x-a|$. You can assume that you have access to \verb|my_average|, the function implemented in the previous question.\\\\For example, with the matrix
-\[\begin{bmatrix}
- 0\quad 2\quad 0\\2\quad 4\quad 1\\1\quad 5\quad 3\end{bmatrix}\]
- the matrix average is 2, and the output of the function \verb|sort_average| should be $[2,2,3,1,1,4,0,0,5]$ (some elements could be at a different position as they have the same distance to the average, for example 1's and 3's positions could be permuted).
+\item Write a Python function \verb|is_latin_square| that takes a numpy array as input, and returns the boolean value \textit{True} if it is a Latin square, \textit{False} otherwise. In the case that the input numpy array does not correspond to an $n\times n$ array, the function should return the boolean value \textit{False}.
+\item An \textbf{intercalate} in a Latin square $L$, denoted by $[i,j,x,y]$, is a pair of rows $i$ and $j$ and a pair of columns $x$ and $y$ such that $L[i,x]=L[j,y]$ and $L[i,y]=L[j,x]$, where $i<j$ and $x<y$. For example, the $4\times 4$ Latin square $L$ above contains an intercalate given by $[0,2,1,3]$ since $L[0,1]=L[2,3]=6$ and $L[0,3]=L[2,1]=7$.\\\\Write a Python function \verb|intercalate| that takes an $n\times n$ Latin square (represented as a numpy array) as input, and returns the following:
+\begin{enumerate}[(i)]
+\item the number of intercalates it contains, and
+\item a list consisting of all the intercalates represented by $[i,j,x,y]$.
+\end{enumerate}
 \end{enumerate}
 \paragraph{Answer}
 \begin{enumerate}[(i)]
