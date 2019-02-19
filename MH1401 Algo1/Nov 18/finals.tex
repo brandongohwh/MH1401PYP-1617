@@ -130,14 +130,14 @@ print(L)
 \end{enumerate}
 \paragraph{Answer}
 \begin{enumerate}[(a)]
-\item 10 (\verb|**| has highest order of precedence, followed by \verb|//| and lastly \verb|+|)
+\item 10 (\verb|**| has highest order of precedence, followed by \verb|//| and lastly \verb|+|)\EOQ
 \item \begin{enumerate}[(i)]
 
-\item `hello', `hello', 100
-\item $[3,4,5,6,7,8,9]$
-\item $[3,5,7,9]$
-\item \text{[}20, `NTU', `SPMS', 99\text{]}\\\text{[}`hi', 99\text{]}\\\text{[}`hi', 99, `hi', 99, `hi', 99\text{]}
-\item \text{[}\text{[}1, 9\text{]}, \text{[}2, 8\text{]}, \text{[}3, 7\text{]}, \text{[}4, 6\text{]}, \text{[}5, 5\text{]}\text{]}
+\item `hello', `hello', 100\EOQ
+\item $[3,4,5,6,7,8,9]$\EOQ
+\item $[3,5,7,9]$\EOQ
+\item \text{[}20, `NTU', `SPMS', 99\text{]}\\\text{[}`hi', 99\text{]}\\\text{[}`hi', 99, `hi', 99, `hi', 99\text{]}\EOQ
+\item \text{[}\text{[}1, 9\text{]}, \text{[}2, 8\text{]}, \text{[}3, 7\text{]}, \text{[}4, 6\text{]}, \text{[}5, 5\text{]}\text{]}\EOQ
 \end{enumerate}
 \end{enumerate}
 \paragraph{Question 2.} \hfill {\bf (25 marks)}
@@ -173,7 +173,8 @@ else:
     print('You are eligible to see the match.')
     print('Ticket price is $10.')
 \end{minted}
-*Note: There are other solutions to this question.
+
+*Note: There are other solutions to this question.\\\mbox{}\EOQ
 \item \begin{minted}[frame=single, framesep=5pt,breaklines]{python}
 import random as rand
 
@@ -196,7 +197,9 @@ else:
             L[i]=0
 print(L)
 \end{minted}
+\EOQ
 \end{enumerate}
+\clearpage
 \paragraph{Question 3.}\hfill {\bf (10 marks)}
 \\\begin{verbatim}
 n = int(input('Enter an integer: '))
@@ -219,9 +222,9 @@ When the program is run, what will be displayed in the output if the following n
 \end{enumerate}
 \paragraph{Answer}
 \begin{enumerate}[(i)]
-\item 50
-\item 90
-\item The number printed on the last line is the sum of the previously entered numbers, excluding the last number (since the previous entered numbers satisfy the \textit{while} condition and \textbf{NOT} the nested \textit{if} condition)
+\item 50\EOQ
+\item 90\EOQ
+\item The number printed on the last line is the sum of the previously entered numbers, excluding the last number (since the previous entered numbers satisfy the \textit{while} condition and \textbf{NOT} the nested \textit{if} condition)\EOQ
 \item \begin{minted}[frame=single, framesep=5pt,breaklines]{python}
 n = int(input('Enter an integer: '))
 num = 0
@@ -233,7 +236,9 @@ else:
     print('ok')
 print(num)
 \end{minted}
+\EOQ
 \end{enumerate}
+\clearpage
 \paragraph{Question 4. }\hfill {\bf (25 marks)}\\\\
 Assume that the numpy module has already been imported using
 \begin{verbatim}
@@ -273,6 +278,7 @@ def is_latin_square(mat):
             return False
     return True
 \end{minted}
+\EOQ
 \item \begin{minted}[frame=single, framesep=5pt,breaklines]{python}
 def intercalate(mat):
     store=[]
@@ -285,6 +291,7 @@ def intercalate(mat):
                         store.append([i,j,x,y])
     return len(store), store #Returns number + list            
 \end{minted}
+\EOQ
 \end{enumerate}
 \bigskip
 \vfill
